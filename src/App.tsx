@@ -385,6 +385,11 @@ export default function App() {
   const [selectedTenseIndex, setSelectedTenseIndex] = useState(0);
   const [activeHeroTab, setActiveHeroTab] = useState<'ar' | 'chat'>('ar');
 
+  // Preferences Interactive State (Matching Screenshots)
+  const [selectedGoal, setSelectedGoal] = useState('Percakapan Santai & Keseharian');
+  const [selectedTheme, setSelectedTheme] = useState('Teknologi');
+  const [selectedStyle, setSelectedStyle] = useState('Santai & Personal');
+
   // Chat simulator state
   const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
     {
@@ -542,6 +547,13 @@ export default function App() {
             <a href="#tutor-ai" className="px-4 py-2 rounded-full hover:text-white transition-colors">
               Tutor AI 24/7
             </a>
+            <a href="#preferensi" className="px-4 py-2 rounded-full hover:text-[#E85AA0] transition-colors">
+              Personalisasi AI
+            </a>
+            <a href="#harga" className="px-4 py-2 rounded-full hover:text-white transition-colors flex items-center gap-1.5 font-bold text-amber-300">
+              <span>Paket Harga</span>
+              <span className="text-[9px] bg-amber-500/30 text-amber-300 px-1.5 py-0.2 rounded-full border border-amber-500/40">5x Trial</span>
+            </a>
             <a href="#16-tenses" className="px-4 py-2 rounded-full hover:text-white transition-colors">
               16 Tenses
             </a>
@@ -663,7 +675,7 @@ export default function App() {
                     Cosmo Buddy <span className="text-[10px] text-slate-400 font-normal">· Maskot &amp; Pemandu TenseGO</span>
                   </div>
                   <p className="text-slate-200 mt-0.5 font-medium leading-snug">
-                    &ldquo;Hai! Aku Cosmo! Sorot benda di kamarmu pakai kamera HP, dan aku bakal buatkan contoh 16 tenses instan!&rdquo;
+                    &ldquo;Hai! Aku Cosmo! Sorot benda pakai kamera HP atau atur Tujuan, Tema, &amp; Gaya AI favoritmu. Aku bakal buatkan materi tenses 100% pas buat kamu!&rdquo;
                   </p>
                 </div>
               </div>
@@ -676,11 +688,23 @@ export default function App() {
                 </span>
               </h1>
 
-              {/* Sub-headline */}
-              <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
-                Ucapkan selamat tinggal pada buku grammar yang membosankan. TenseGO memadukan AI &amp; Augmented Reality (AR)
-                untuk menyulap objek di sekitarmu menjadi kelas Bahasa Inggris interaktif.
-              </p>
+              {/* Sub-headline combining AR+AI and Learning Preferences */}
+              <div className="space-y-3">
+                <p className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
+                  Ucapkan selamat tinggal pada buku grammar yang membosankan. TenseGO memadukan AI &amp; Augmented Reality (AR)
+                  untuk menyulap objek di sekitarmu menjadi kelas Bahasa Inggris interaktif.
+                </p>
+                
+                <div className="p-4 rounded-2xl bg-[#8A4FFF]/10 border border-[#8A4FFF]/30 backdrop-blur-sm text-left max-w-xl mx-auto lg:mx-0">
+                  <div className="flex items-center gap-2 text-xs font-bold text-[#E85AA0] uppercase tracking-wider mb-1">
+                    <Sparkles className="w-3.5 h-3.5 text-[#E85AA0]" />
+                    <span>Atur Preferensi Belajar Sesuai Gaya Kamu</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
+                    TenseGO membebaskanmu memilih <strong className="text-white">Tujuan Belajar</strong>, <strong className="text-white">Tema Belajar</strong>, dan <strong className="text-white">Gaya Penjelasan AI</strong> agar materi terasa 100% relevan dengan aktivitas harianmu!
+                  </p>
+                </div>
+              </div>
 
               {/* CTAs matching screenshot buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
@@ -1049,6 +1073,176 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* Feature 3: Personalisasi & Preferensi Belajar (Matching screenshots) */}
+        <div id="preferensi" className="pt-10 border-t border-white/10 space-y-10">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <div className="text-xs font-bold text-[#A26BFF] uppercase tracking-wider flex items-center justify-center gap-2">
+              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-5 h-5 object-contain" /> Fitur 03 • Personalisasi Preferensi Belajar
+            </div>
+            <h3 className="text-2xl sm:text-4xl font-extrabold text-white">
+              Atur Preferensi Belajar Sesuai Gaya Kamu
+            </h3>
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              TenseGO membebaskanmu memilih <strong className="text-white">Tujuan Belajar</strong>, <strong className="text-[#E85AA0]">Tema Belajar</strong>, dan <strong className="text-[#A26BFF]">Gaya Penjelasan AI</strong> agar materi terasa 100% relevan dengan aktivitas harianmu!
+            </p>
+          </div>
+
+          {/* Interactive Preferences Simulator */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Left Controls: 3 Preference Card Selectors */}
+            <div className="lg:col-span-7 space-y-4">
+              {/* Box 1: Tujuan Belajar */}
+              <div className="glass-card-reference rounded-3xl p-5 border border-white/15 space-y-3">
+                <div className="flex items-center justify-between text-xs text-[#A26BFF] font-bold">
+                  <span className="flex items-center gap-2">
+                    <Target className="w-4 h-4" /> 1. Pilih Tujuan Belajar:
+                  </span>
+                  <span className="text-[10px] bg-[#8A4FFF]/20 px-2.5 py-0.5 rounded-full text-slate-200">
+                    {selectedGoal}
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                  {[
+                    'Percakapan Santai & Keseharian',
+                    'Belajar Dasar & Kosakata Ringan',
+                    'Akademik & Persiapan Ujian',
+                    'Dunia Kerja & Bisnis',
+                    'Traveling & Liburan',
+                    'Persiapan Tes (TOEFL / IELTS)'
+                  ].map(goal => (
+                    <button
+                      key={goal}
+                      onClick={() => setSelectedGoal(goal)}
+                      className={`p-2.5 rounded-xl text-left font-medium transition-all flex items-center justify-between ${
+                        selectedGoal === goal
+                          ? 'bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] text-white font-bold shadow-md'
+                          : 'bg-black/40 text-slate-300 hover:bg-white/10 border border-white/5'
+                      }`}
+                    >
+                      <span className="truncate pr-1">{goal}</span>
+                      <span className={`w-3.5 h-3.5 rounded-full border flex items-center justify-center shrink-0 ${
+                        selectedGoal === goal ? 'border-white bg-white text-[#8A4FFF]' : 'border-slate-500'
+                      }`}>
+                        {selectedGoal === goal && <div className="w-1.5 h-1.5 bg-[#8A4FFF] rounded-full" />}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Box 2: Tema Belajar */}
+              <div className="glass-card-reference rounded-3xl p-5 border border-white/15 space-y-3">
+                <div className="flex items-center justify-between text-xs text-[#E85AA0] font-bold">
+                  <span className="flex items-center gap-2">
+                    <Layers className="w-4 h-4" /> 2. Pilih Tema Belajar:
+                  </span>
+                  <span className="text-[10px] bg-[#E85AA0]/20 px-2.5 py-0.5 rounded-full text-slate-200">
+                    {selectedTheme}
+                  </span>
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                  {['Umum', 'Kehidupan Pesisir', 'Perkotaan', 'Pedesaan', 'Teknologi'].map(theme => (
+                    <button
+                      key={theme}
+                      onClick={() => setSelectedTheme(theme)}
+                      className={`p-2.5 rounded-xl text-center font-medium transition-all ${
+                        selectedTheme === theme
+                          ? 'bg-gradient-to-r from-[#E85AA0] to-pink-500 text-white font-bold shadow-md'
+                          : 'bg-black/40 text-slate-300 hover:bg-white/10 border border-white/5'
+                      }`}
+                    >
+                      {theme}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Box 3: Gaya Penjelasan AI */}
+              <div className="glass-card-reference rounded-3xl p-5 border border-white/15 space-y-3">
+                <div className="flex items-center justify-between text-xs text-emerald-400 font-bold">
+                  <span className="flex items-center gap-2">
+                    <Bot className="w-4 h-4" /> 3. Pilih Gaya Penjelasan AI:
+                  </span>
+                  <span className="text-[10px] bg-emerald-500/20 px-2.5 py-0.5 rounded-full text-slate-200">
+                    Model: TenseGO Flux
+                  </span>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+                  {['Santai & Personal', 'Akademis & Formal', 'Sederhana & Mudah Dipahami'].map(style => (
+                    <button
+                      key={style}
+                      onClick={() => setSelectedStyle(style)}
+                      className={`p-2.5 rounded-xl text-center font-medium transition-all ${
+                        selectedStyle === style
+                          ? 'bg-emerald-500 text-slate-950 font-bold shadow-md'
+                          : 'bg-black/40 text-slate-300 hover:bg-white/10 border border-white/5'
+                      }`}
+                    >
+                      {style}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Panel: Live Response Preview Card from Cosmo Buddy */}
+            <div className="lg:col-span-5 glass-card-reference rounded-3xl p-6 border border-[#8A4FFF]/40 bg-gradient-to-b from-[#1C163C] to-[#0D0A1A] space-y-4 shadow-2xl sticky top-24">
+              <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#8A4FFF] to-[#E85AA0] p-0.5 flex items-center justify-center">
+                    <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-full h-full object-contain" />
+                  </div>
+                  <div>
+                    <div className="text-xs font-bold text-white">Simulasi Jawaban Cosmo Buddy</div>
+                    <div className="text-[10px] text-emerald-400">Model: TenseGO Flux Active</div>
+                  </div>
+                </div>
+                <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-mono">
+                  Live Response
+                </span>
+              </div>
+
+              {/* Dynamic Applied Tags */}
+              <div className="flex flex-wrap gap-1.5 text-[10px]">
+                <span className="px-2 py-0.5 rounded-md bg-[#8A4FFF]/30 text-[#A26BFF] font-semibold">🎯 {selectedGoal}</span>
+                <span className="px-2 py-0.5 rounded-md bg-[#E85AA0]/30 text-pink-300 font-semibold">🏙️ {selectedTheme}</span>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-500/30 text-emerald-300 font-semibold">🗣️ {selectedStyle}</span>
+              </div>
+
+              {/* Cosmo Generated Speech Output */}
+              <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-2 text-xs leading-relaxed">
+                <div className="text-[#A26BFF] font-bold text-xs flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5" /> Contoh Penjelasan Hasil Preferensimu:
+                </div>
+                <p className="text-slate-200">
+                  {selectedGoal.includes('Kerja') || selectedGoal.includes('Bisnis')
+                    ? `Halo! Untuk kebutuhan ${selectedGoal} dengan latar ${selectedTheme}, contoh Simple Present-nya: "Our software engineers develop secure cloud systems every day." Gaya ${selectedStyle} ini siap membantumu presentasi di kantor!`
+                    : selectedGoal.includes('Traveling') || selectedGoal.includes('Liburan')
+                    ? `Yo! Siap liburan dengan fokus ${selectedGoal} di tema ${selectedTheme}? Ini contoh Past Continuous-nya: "We were taking photos at the beach when the sun set." Gaya ${selectedStyle} bikin kamu tidak kagok saat ngobrol di jalan!`
+                    : selectedGoal.includes('TOEFL') || selectedGoal.includes('Persiapan Ujian') || selectedGoal.includes('Akademik')
+                    ? `Salam! Untuk target ${selectedGoal} berlatar ${selectedTheme}, rumus Present Perfect Continuous-nya adalah: "Researchers have been analyzing data since morning." Gaya ${selectedStyle} ini dirancang agar soal ujian terasa mudah!`
+                    : `Hai sahabat TenseGO! Dengan pilihan ${selectedGoal} dan tema ${selectedTheme}, contoh Present Continuous-nya: "The smartphone is charging rapidly on the desk." Gaya ${selectedStyle} bikin kamu paham dalam sekali baca!`}
+                </p>
+              </div>
+
+              <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-[11px] text-slate-300 flex items-center gap-2">
+                <Zap className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>Pilih kombinasi apa saja saat belajar di Android, Cosmo Buddy akan menyesuaikan bahasanya secara otomatis!</span>
+              </div>
+
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:from-[#9861FF] hover:to-[#B37EFF] transition-all"
+              >
+                <span>Coba Fitur Ini di Android (Gratis)</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ------------------------------------------------------------- */}
@@ -1211,6 +1405,244 @@ export default function App() {
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
               Dapatkan evaluasi instan tanpa minder dan latih refleks bahasa Inggrismu!
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* 7.5 PRICING & TRIAL OFFER SECTION (Matching App Screenshots)   */}
+      {/* ------------------------------------------------------------- */}
+      <section id="harga" className="py-20 bg-gradient-to-b from-[#110B29] via-[#1A123D] to-[#0D0821] border-t border-white/10 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          {/* Section Header & Mascot Callout */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A4FFF]/20 border border-[#8A4FFF]/40 text-[#A26BFF] text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="w-4 h-4 text-[#E85AA0]" />
+              <span>Paket Berlangganan &amp; 5x Trial Gratis</span>
+            </div>
+
+            <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+              Investasi Terjangkau untuk Fasih 16 Tenses
+            </h2>
+
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Mulai secara <strong className="text-emerald-400">100% Gratis dengan 5x Kesempatan Trial</strong> di HP Android. Tingkatkan ke paket PRO atau Ultimate untuk bertanya ke Tutor AI tanpa batas!
+            </p>
+
+            {/* Cosmo Buddy Pricing Banner */}
+            <div className="p-4 rounded-3xl bg-gradient-to-r from-[#211645] via-[#2E1B56] to-[#1C123B] border border-[#8A4FFF]/50 flex items-center gap-4 text-left shadow-xl max-w-2xl mx-auto">
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#8A4FFF] to-[#E85AA0] p-0.5 flex items-center justify-center shrink-0 shadow-lg overflow-hidden">
+                <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo Buddy Pricing" className="w-full h-full object-contain" />
+              </div>
+              <div className="text-xs space-y-1">
+                <div className="font-bold text-[#A26BFF] flex items-center gap-2">
+                  <span>Cosmo Buddy</span>
+                  <span className="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/30">5x Free Trial Active</span>
+                </div>
+                <p className="text-slate-200 leading-snug">
+                  &ldquo;Ayo manfaatkan 5x trial gratismu dulu! Setelah puas, kamu bisa pilih paket bulanan hemat atau langganan seumur hidup!&rdquo;
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing Grid (3 Cards matching Screenshots) */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
+            {/* Card 1: TenseGo Basic (Trial) */}
+            <div className="glass-card-reference rounded-3xl p-7 border border-white/15 bg-white/5 space-y-6 flex flex-col justify-between relative opacity-90 hover:opacity-100 transition-opacity">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">TenseGo Basic (Trial)</span>
+                  <span className="text-[10px] bg-slate-700/60 text-slate-300 px-2.5 py-1 rounded-full border border-white/10 font-mono">
+                    KUOTA HABIS (5/5)
+                  </span>
+                </div>
+
+                <div>
+                  <div className="text-3xl font-extrabold text-white">Gratis</div>
+                  <div className="text-xs text-slate-400 mt-1">Dapatkan 5x percobaan AI &amp; Kamera AR gratis saat pertama install.</div>
+                </div>
+
+                <div className="pt-4 border-t border-white/10 space-y-3 text-xs">
+                  <div className="flex items-start gap-2 text-slate-400">
+                    <XCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <span>Akses AI (Terkunci setelah 5x trial)</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-slate-400">
+                    <XCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <span>Personalisasi Materi (Terkunci)</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-slate-400">
+                    <XCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <span>Terdapat Iklan</span>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 rounded-full bg-white/10 hover:bg-white/15 text-slate-300 font-semibold text-xs text-center border border-white/10 transition-colors block"
+              >
+                Paket Saat Ini (Coba Gratis)
+              </a>
+            </div>
+
+            {/* Card 2: TenseGo Pro Monthly (Featured Screenshot Highlight) */}
+            <div className="glass-card-reference rounded-3xl p-8 border-2 border-[#8A4FFF] bg-gradient-to-b from-[#24174D] via-[#1A1138] to-[#120B29] space-y-6 flex flex-col justify-between relative shadow-2xl shadow-[#8A4FFF]/30 scale-100 lg:scale-105 z-10">
+              {/* Top Banner Tag */}
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-[11px] uppercase tracking-wider shadow-lg border border-amber-300 flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                <Sparkles className="w-3.5 h-3.5" /> PENAWARAN TERBATAS
+              </div>
+
+              <div className="space-y-5 pt-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-extrabold text-[#A26BFF]">TenseGo Pro Monthly</span>
+                  <span className="text-xs bg-[#E85AA0]/20 text-pink-300 font-bold px-2.5 py-0.5 rounded-full border border-[#E85AA0]/30">
+                    85% OFF
+                  </span>
+                </div>
+
+                {/* Price Display */}
+                <div>
+                  <div className="text-xs text-slate-400 line-through">Rp 199.000</div>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-3xl sm:text-4xl font-extrabold text-white">Rp 29.000</span>
+                    <span className="text-xs text-slate-300 font-medium">/ bln</span>
+                  </div>
+                  <div className="mt-2 text-[11px] font-bold text-amber-300 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20 inline-block">
+                    🔥 HEMAT HINGGA 85%
+                  </div>
+                </div>
+
+                {/* Checklist (Exact Screenshot Match) */}
+                <div className="pt-4 border-t border-white/15 space-y-3 text-xs">
+                  <div className="flex items-center gap-2 text-slate-100 font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-[#8A4FFF] shrink-0" />
+                    <span>Tanya AI Sepuasnya (60x/Bulan)</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-100 font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-[#8A4FFF] shrink-0" />
+                    <span>Personalisasi Materi Tak Terbatas</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-slate-100 font-medium">
+                    <CheckCircle2 className="w-4 h-4 text-[#8A4FFF] shrink-0" />
+                    <span>Belajar Fokus (Bebas Iklan)</span>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-4 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#E85AA0] hover:from-[#9861FF] hover:to-[#F36DB1] text-white font-extrabold text-sm shadow-xl shadow-[#8A4FFF]/40 text-center transition-all flex items-center justify-center gap-2 active:scale-95"
+              >
+                <span>Ambil Akses PRO Sekarang</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
+
+            {/* Card 3: TenseGo Ultimate (Tahunan & Lifetime Options Screenshot) */}
+            <div className="glass-card-reference rounded-3xl p-7 border border-white/20 bg-gradient-to-b from-[#1B1438] to-[#0E0A21] space-y-6 flex flex-col justify-between relative shadow-xl">
+              <div className="space-y-5">
+                <div className="text-sm font-extrabold text-white border-b border-white/10 pb-3 flex items-center justify-between">
+                  <span>TenseGo Ultimate</span>
+                  <span className="text-[10px] bg-emerald-500/20 text-emerald-300 px-2.5 py-0.5 rounded-full font-semibold">
+                    Rekomendasi Hemat
+                  </span>
+                </div>
+
+                {/* Option 1: TAHUNAN */}
+                <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-2">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold text-slate-400">TAHUNAN</span>
+                      <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-1.5 py-0.2 rounded">58% OFF</span>
+                    </div>
+                    <div className="text-xs text-slate-400 line-through">Rp 1.188.000</div>
+                    <div className="text-base font-extrabold text-white">
+                      Rp 499.000 <span className="text-[10px] text-slate-300 font-normal">/ thn</span>
+                    </div>
+                    <div className="text-[10px] text-emerald-400">~Rp 41.583 / bln</div>
+                  </div>
+
+                  <a
+                    href={PLAY_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-full bg-white/15 hover:bg-white/25 text-white font-bold text-xs border border-white/20 transition-all"
+                  >
+                    Pilih
+                  </a>
+                </div>
+
+                {/* Option 2: LIFETIME */}
+                <div className="p-3.5 rounded-2xl bg-gradient-to-r from-[#281A52] to-[#1E1242] border border-[#8A4FFF]/40 flex items-center justify-between gap-2">
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[10px] font-bold text-[#A26BFF]">LIFETIME</span>
+                      <span className="text-[10px] bg-[#8A4FFF]/30 text-[#A26BFF] font-bold px-1.5 py-0.2 rounded">SEKALI BAYAR</span>
+                    </div>
+                    <div className="text-base font-extrabold text-white mt-0.5">
+                      Rp 899.000
+                    </div>
+                    <div className="text-[10px] text-slate-300">Selamanya, tanpa perpanjangan</div>
+                  </div>
+
+                  <a
+                    href={PLAY_STORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 rounded-full bg-[#8A4FFF] hover:bg-[#9861FF] text-white font-bold text-xs shadow-md transition-all"
+                  >
+                    Pilih
+                  </a>
+                </div>
+
+                {/* Ultimate Checklist (Exact Screenshot Match) */}
+                <div className="pt-2 space-y-2.5 text-xs text-slate-200">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <span>Tanya AI Sepuasnya (300x/Bulan)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <span>Personalisasi Materi Tak Terbatas</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <span>Belajar Fokus (Bebas Iklan)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <span>Analisa Gaya Belajar AI</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <span>Prioritas Respon AI (Lebih Cepat)</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <span>Akses Fitur Baru Duluan</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <span>Badge Profil Eksklusif</span>
+                  </div>
+                </div>
+              </div>
+
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs text-center border border-white/20 transition-all block mt-4"
+              >
+                Ambil Akses Ultimate
+              </a>
+            </div>
           </div>
         </div>
       </section>
