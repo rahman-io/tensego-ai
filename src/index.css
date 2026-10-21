@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-violet: #8A4FFF;
+    --brand-violet-bright: #A26BFF;
+    --brand-pink: #E85AA0;
+    --dark-bg: #0A0814;
+    --dark-surface: #131024;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #0A0814;
+    color: #F1F0F7;
+    overflow-x: hidden;
+  }
+}
+
+/* Atmospheric Mesh Gradients like the screenshot */
+.bg-mesh-glow {
+  background: 
+    radial-gradient(circle at 75% 20%, rgba(94, 129, 235, 0.22) 0%, transparent 45%),
+    radial-gradient(circle at 20% 40%, rgba(138, 79, 255, 0.28) 0%, transparent 50%),
+    radial-gradient(circle at 50% 80%, rgba(216, 85, 160, 0.18) 0%, transparent 55%),
+    #0A0814;
+}
+
+/* Glassmorphism Capsule Nav Bar like screenshot */
+.glass-nav-capsule {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+}
+
+/* Floating Glass Cards from the screenshot */
+.glass-card-reference {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+.glass-card-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-hover:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(162, 107, 255, 0.4);
+  transform: translateY(-3px);
+}
+
+/* Custom rounded squircle card like the boy student card in screenshot */
+.squircle-card-1 {
+  border-radius: 36px 36px 12px 36px;
+}
+.squircle-card-2 {
+  border-radius: 28px;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0814;
+}
+::-webkit-scrollbar-thumb {
+  background: #251D42;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8A4FFF;
+}

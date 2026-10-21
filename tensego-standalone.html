@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TenseGO: Kuasai 16 Tenses dengan AI & Kamera AR</title>
+  <meta name="description" content="TenseGO hadir mengawinkan teknologi AI & Augmented Reality (AR) untuk menyulap dunia di sekitarmu menjadi kelas Bahasa Inggris interaktif. Download gratis di Google Play!" />
+  <meta name="keywords" content="Aplikasi Belajar Bahasa Inggris AI, Augmented Reality English, Belajar Grammar Mudah, Tutor Bahasa Inggris Online 24/7, Aplikasi 16 Tenses Terbaru" />
+  <meta name="theme-color" content="#6A5AE0" />
+
+  <!-- OpenGraph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="TenseGO – Kuasai 16 Tenses dengan AI & Kamera AR" />
+  <meta property="og:description" content="Ucapkan selamat tinggal pada buku grammar yang membosankan. TenseGO menyulap benda di sekitarmu menjadi contoh kalimat 16 tenses secara instan." />
+  <meta property="og:site_name" content="TenseGO" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brandPurple: '#6A5AE0',
+            brandCoral: '#FF6B81',
+            darkCanvas: '#0B0914',
+            darkSurface: '#141124',
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0B0914;
+      color: #F1F0F7;
+      overflow-x: hidden;
+    }
+    .glass-nav {
+      background: rgba(11, 9, 20, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: rgba(22, 18, 38, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(106, 90, 224, 0.2);
+    }
+    .glow-purple {
+      box-shadow: 0 0 50px -10px rgba(106, 90, 224, 0.35);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "TenseGO",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Android 8.0+",
+    "description": "Aplikasi belajar 16 Tenses Bahasa Inggris revolusioner menggunakan Augmented Reality (AR) dan Tutor AI 24/7.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "IDR" }
+  }
+  </script>
+</head>
+<body class="selection:bg-brandPurple selection:text-white">
+
+  <!-- TOP BAR -->
+  <header class="sticky top-0 z-50 glass-nav px-4 sm:px-6 lg:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between gap-8">
+      <a href="#" class="flex items-center gap-2.5 whitespace-nowrap shrink-0">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-[#6A5AE0] to-[#FF6B81] flex items-center justify-center text-white shadow-lg">
+          📷
+        </div>
+        <span class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+          Tense<span class="text-[#FF6B81]">GO</span>
+          <span class="text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Baru Rilis</span>
+        </span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+        <a href="#fitur-ar" class="hover:text-white transition-colors">Kamera AR</a>
+        <a href="#tutor-ai" class="hover:text-white transition-colors">Tutor AI 24/7</a>
+        <a href="#16-tenses" class="hover:text-white transition-colors">16 Tenses</a>
+        <a href="#cara-kerja" class="hover:text-white transition-colors">Cara Kerja</a>
+        <a href="#misi-kami" class="hover:text-white transition-colors">Misi Kami</a>
+        <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
+      </nav>
+
+      <div class="flex items-center gap-3 shrink-0">
+        <a href="https://play.google.com/store/apps/details?id=id.replace.tensegoai" target="_blank" rel="noopener noreferrer" class="px-4 py-2 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#FF6B81] to-[#e85068] hover:from-[#ff7e92] hover:to-[#FF6B81] rounded-xl shadow-lg transition-all flex items-center gap-2">
+          📥 <span>Download di Google Play</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brandPurple/20 rounded-full blur-[140px] pointer-events-none -z-10"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <!-- Left: Copy & CTAs -->
+        <div class="lg:col-span-6 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brandPurple/15 border border-brandPurple/30 text-purple-300 text-xs sm:text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-brandCoral"></span>
+            <span>🚀 BARU SAJA RILIS! • JADILAH EARLY ADOPTER</span>
+          </div>
+
+          <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold text-white leading-[1.18] tracking-tight">
+            Ucapkan Selamat Tinggal pada <span class="bg-gradient-to-r from-purple-300 via-[#FF6B81] to-pink-300 bg-clip-text text-transparent">Buku Grammar</span> yang Membosankan.
+          </h1>
+
+          <p class="text-base sm:text-lg text-slate-300 leading-relaxed max-w-xl mx-auto lg:mx-0">
+            TenseGO hadir mengawinkan teknologi <strong class="text-white font-semibold">AI & Augmented Reality (AR)</strong> untuk menyulap dunia di sekitarmu menjadi kelas Bahasa Inggris interaktif.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <button onclick="openPlayModal()" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-[#FF6B81] to-[#e85068] hover:from-[#ff7e92] hover:to-[#FF6B81] text-white font-bold text-base shadow-xl flex items-center justify-center gap-2">
+              📥 <span>Download Sekarang di Google Play</span>
+            </button>
+            <a href="#demo-section" class="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-white font-semibold text-sm border border-white/15 flex items-center justify-center gap-2">
+              👁️ <span>Coba Demo AR & Tutor AI</span>
+            </a>
+          </div>
+
+          <div class="pt-4 border-t border-white/10 text-xs sm:text-sm text-slate-400 flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2">
+            <span class="text-emerald-400 font-medium">✓ 100% Gratis di Play Store</span>
+            <span>·</span>
+            <span>✓ Android 8.0+ Ready</span>
+            <span>·</span>
+            <span class="text-pink-300">✓ Akses Gratis untuk Early Adopters</span>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Device Mockup -->
+        <div id="demo-section" class="lg:col-span-6 flex justify-center">
+          <div class="w-full max-w-[390px] bg-[#120F24] rounded-[42px] p-4 border-2 border-white/20 shadow-2xl relative glow-purple">
+            <!-- Notch / Status -->
+            <div class="flex items-center justify-between px-6 py-1 mb-2 text-[11px] text-slate-400">
+              <span class="font-mono">12:45</span>
+              <div class="w-16 h-3.5 bg-black rounded-full flex items-center justify-center">
+                <div class="w-2 h-2 rounded-full bg-slate-800"></div>
+              </div>
+              <span class="text-emerald-400 font-semibold">5G 100%</span>
+            </div>
+
+            <!-- View Tabs inside phone -->
+            <div class="grid grid-cols-2 p-1 bg-black/40 rounded-xl mb-3 border border-white/10 text-xs font-semibold">
+              <button id="tabBtnAR" onclick="switchPhoneTab('ar')" class="py-1.5 rounded-lg bg-brandPurple text-white transition-all">
+                📷 Kamera AR Aktif
+              </button>
+              <button id="tabBtnChat" onclick="switchPhoneTab('chat')" class="py-1.5 rounded-lg text-slate-400 hover:text-white transition-all">
+                🤖 Tutor AI (24/7)
+              </button>
+            </div>
+
+            <!-- TAB 1: AR View -->
+            <div id="phoneViewAR" class="space-y-3">
+              <div class="relative h-60 bg-gradient-to-b from-[#1C163C] to-[#0A0717] rounded-2xl border border-white/15 p-4 flex flex-col items-center justify-center text-center overflow-hidden">
+                <div class="text-5xl select-none filter drop-shadow-[0_0_12px_rgba(106,90,224,0.6)] mb-2" id="arObjEmoji">☕</div>
+                <div class="px-3 py-1 rounded-full bg-brandPurple/90 text-white text-xs font-semibold mb-1" id="arObjLabel">
+                  Scan: Cangkir Kopi Hangat
+                </div>
+                <div class="text-[10px] text-emerald-400 font-mono">Confidence: 99.4% • ARCore Active</div>
+
+                <!-- Bounding Box Brackets -->
+                <div class="absolute inset-x-8 inset-y-6 border-2 border-dashed border-brandPurple/40 rounded-2xl pointer-events-none"></div>
+              </div>
+
+              <!-- Object Selector -->
+              <div class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1 text-xs">
+                <button onclick="setARItem('coffee', '☕', 'Cangkir Kopi Hangat', 'The coffee is steaming gently on the desk.', 'Present Continuous', 'S + is/am/are + V-ing')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-brandPurple text-white shrink-0">☕ Kopi</button>
+                <button onclick="setARItem('laptop', '💻', 'Laptop Kerja', 'This laptop operates silently during study.', 'Simple Present', 'S + V1 (s/es)')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-brandPurple text-white shrink-0">💻 Laptop</button>
+                <button onclick="setARItem('plant', '🌿', 'Tanaman Monstera', 'The leaves are absorbing morning sunlight.', 'Present Continuous', 'S + are + V-ing')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-brandPurple text-white shrink-0">🌿 Tanaman</button>
+                <button onclick="setARItem('shoes', '👟', 'Sepatu Lari Sporty', 'I had laced up these shoes before the rain.', 'Past Perfect', 'S + had + V3')" class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-brandPurple text-white shrink-0">👟 Sepatu</button>
+              </div>
+
+              <!-- Sentence Output -->
+              <div class="p-3 rounded-xl bg-black/40 border border-white/10 text-xs space-y-1">
+                <div class="text-[#FF6B81] font-bold font-mono text-[11px]" id="arTenseType">Present Continuous:</div>
+                <div class="text-white font-semibold text-sm" id="arEnglishText">&ldquo;The coffee is steaming gently on the desk.&rdquo;</div>
+                <div class="text-slate-400 text-[10px]" id="arFormula">Pola: S + is/am/are + V-ing</div>
+              </div>
+            </div>
+
+            <!-- TAB 2: AI Chat View -->
+            <div id="phoneViewChat" class="hidden space-y-3">
+              <div class="h-64 bg-black/50 rounded-2xl border border-white/15 p-3 overflow-y-auto space-y-2 text-xs" id="chatBox">
+                <div class="p-2.5 rounded-xl bg-[#1C163C] text-slate-200 border border-white/10 rounded-tl-xs">
+                  Halo! Aku Tutor AI TenseGO. Tanya apa saja seputar 16 tenses, aku bimbing dengan sabar tanpa dihakimi!
+                </div>
+              </div>
+
+              <div class="flex gap-1 overflow-x-auto no-scrollbar text-[10px]">
+                <button onclick="sendQuickChat('was vs has been')" class="px-2 py-1 rounded bg-white/10 hover:bg-brandPurple text-slate-300 hover:text-white shrink-0">💬 "was" vs "has been"?</button>
+                <button onclick="sendQuickChat('past perfect')" class="px-2 py-1 rounded bg-white/10 hover:bg-brandPurple text-slate-300 hover:text-white shrink-0">💬 Kapan pakai Past Perfect?</button>
+              </div>
+            </div>
+
+            <div class="w-24 h-1 bg-white/20 rounded-full mx-auto mt-3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE "WHY" SECTION -->
+  <section class="py-16 md:py-24 bg-[#0F0C1E] border-y border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center space-y-4">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Mengapa Belajar Grammar Selalu Terasa Sulit?</h2>
+        <p class="text-slate-300 text-base sm:text-lg leading-relaxed">
+          Menghafal rumus seringkali tidak membekas di memori. TenseGO lahir untuk mengubah cara kerjanya, yaitu bukan dengan menghafal, melainkan mengalami bahasa itu secara langsung melalui benda di sekitarmu.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-red-500/20 bg-red-950/10 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            ❌ Cara Lama (Buku Hafalan Kaku)
+          </h3>
+          <ul class="space-y-3 text-sm text-slate-300">
+            <li>• Menghafal rumus S + V2 + O tanpa konteks nyata.</li>
+            <li>• Minder dan takut salah saat diajak berbicara langsung.</li>
+            <li>• 16 tenses terasa sangat mirip dan membingungkan.</li>
+            <li>• Cepat bosan dalam 15 menit pertama.</li>
+          </ul>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-brandPurple/40 bg-gradient-to-br from-[#1C163C]/80 to-[#120F24]/80 space-y-4 glow-purple">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            ✨ Cara TenseGO (AI & Kamera AR)
+          </h3>
+          <ul class="space-y-3 text-sm text-slate-200">
+            <li>• Arahkan kamera ke gelas kopi, langsung paham Present Continuous.</li>
+            <li>• Tanya Tutor AI 24/7 tanpa takut dimarahi atau dihakimi.</li>
+            <li>• Visualisasi real-time yang langsung lengket di ingatan.</li>
+            <li>• Personalisasi level dari pemula (A1) hingga mahir (C2).</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES SECTION (ZIGZAG) -->
+  <section id="fitur-ar" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+    <!-- Feature 1 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="space-y-4">
+        <div class="text-xs font-bold text-brandCoral uppercase tracking-wider">Fitur 01 • Kamera Ajaib/AR</div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-white">Belajar dari Apa yang Kamu Lihat</h3>
+        <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+          Arahkan kamera ke sekelilingmu. AI kami mendeteksi objek nyata dan membuat puluhan contoh kalimat tenses secara instan. Belajar yang nempel di otak!
+        </p>
+      </div>
+      <div class="glass-card rounded-3xl p-6 border border-brandPurple/30 text-center">
+        <div class="text-5xl my-4">☕ 💻 🌿</div>
+        <div class="text-white font-bold text-base">Object Spatial AI Recognition</div>
+        <p class="text-xs text-slate-400 mt-1">Mengenali ribuan objek sehari-hari dan merangkai kalimat tata bahasa dalam 0.2 detik.</p>
+      </div>
+    </div>
+
+    <!-- Feature 2 -->
+    <div id="tutor-ai" class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <div class="glass-card rounded-3xl p-6 border border-brandCoral/30 text-center order-2 lg:order-1">
+        <div class="text-5xl my-4">🤖 💬</div>
+        <div class="text-white font-bold text-base">Tutor AI 24 Jam Ramah & Sabar</div>
+        <p class="text-xs text-slate-400 mt-1">Bimbingan tanpa rasa takut. Menjawab pertanyaan grammar tersulit layaknya sahabat.</p>
+      </div>
+      <div class="space-y-4 order-1 lg:order-2">
+        <div class="text-xs font-bold text-brandPurple uppercase tracking-wider">Fitur 02 • Tutor Chat AI</div>
+        <h3 class="text-2xl sm:text-3xl font-bold text-white">Guru Privat Anti-Galak 24/7</h3>
+        <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+          Takut salah ngomong? Tutor AI kami siap menjelaskan materi tersulit dengan sabar. Dia tidak menyalahkan, tapi membimbingmu.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="cara-kerja" class="py-20 bg-[#0F0C1E] border-y border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
+      <div class="max-w-2xl mx-auto space-y-3">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white">3 Langkah Mudah Memulai</h2>
+        <p class="text-slate-400 text-sm">Tanpa langkah berbelit-belit, langsung mulai praktik hari ini.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <div class="glass-card rounded-3xl p-7 border border-white/10 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-brandPurple/30 text-purple-300 flex items-center justify-center font-bold">1</div>
+          <h3 class="text-base font-bold text-white">Atur Tujuan Belajarmu</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Pilih level (A1-C2) dan target harian (5-15 menit). Kosakata otomatis disesuaikan.</p>
+        </div>
+        <div class="glass-card rounded-3xl p-7 border border-brandCoral/30 bg-gradient-to-b from-[#1E1738] to-[#120F24] space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-brandCoral/30 text-brandCoral flex items-center justify-center font-bold">2</div>
+          <h3 class="text-base font-bold text-white">Scan Benda (AR) atau Chat Tutor</h3>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">Nyalakan kamera untuk mengenali barang-barang di kamarmu, atau tanyakan rumus grammar ke AI.</p>
+        </div>
+        <div class="glass-card rounded-3xl p-7 border border-white/10 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-brandPurple/30 text-purple-300 flex items-center justify-center font-bold">3</div>
+          <h3 class="text-base font-bold text-white">Kuasai Tenses dengan Pede</h3>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">Dapatkan evaluasi instan tanpa minder dan latih refleks bahasa Inggrismu!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDER'S PROMISE SECTION -->
+  <section id="misi-kami" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-8">
+    <div class="space-y-3">
+      <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">Komitmen & Misi</div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Misi Kami untuk Membantu Kamu</h2>
+    </div>
+
+    <div class="glass-card rounded-3xl p-8 sm:p-12 border border-brandPurple/30 space-y-6 text-left">
+      <p class="text-lg sm:text-xl font-medium text-slate-100 italic leading-relaxed">
+        &ldquo;Kami membangun TenseGO karena kami tahu susahnya menghafal 16 Tenses bahasa Inggris. Kami ingin kamu belajar tanpa tekanan, tanpa bosan, langsung dari sekitarmu.&rdquo;
+      </p>
+
+      <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <div class="font-bold text-white text-base">Tim Developer TenseGO</div>
+          <div class="text-xs text-slate-400">Mobile Engineers & Language Educators</div>
+        </div>
+        <button onclick="openFeedbackModal()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/15">
+          💬 Berikan Masukan Developer
+        </button>
+      </div>
+
+      <div class="p-4 rounded-xl bg-black/40 text-xs text-slate-300 space-y-1">
+        <strong class="text-brandCoral">Jadilah Pengguna Pertama Kami!</strong>
+        <p>Aplikasi ini baru saja rilis. Bantu kami berkembang dengan mencoba aplikasinya dan memberikan feedback langsung!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div class="text-center space-y-3">
+      <h2 class="text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
+      <p class="text-slate-400 text-sm">Informasi penting seputar aplikasi TenseGO</p>
+    </div>
+
+    <div class="space-y-3 text-sm">
+      <div class="glass-card rounded-2xl p-4 border border-white/10">
+        <div class="font-bold text-white mb-1">Apakah TenseGO gratis diunduh?</div>
+        <div class="text-slate-300 text-xs leading-relaxed">Ya, TenseGO 100% gratis diunduh di Google Play Store untuk semua pengguna awal.</div>
+      </div>
+      <div class="glass-card rounded-2xl p-4 border border-white/10">
+        <div class="font-bold text-white mb-1">Perangkat Android apa yang didukung?</div>
+        <div class="text-slate-300 text-xs leading-relaxed">Mendukung semua ponsel Android dengan OS Android 8.0 ke atas yang memiliki kamera belakang.</div>
+      </div>
+      <div class="glass-card rounded-2xl p-4 border border-white/10">
+        <div class="font-bold text-white mb-1">Bagaimana cara kerja fitur AR?</div>
+        <div class="text-slate-300 text-xs leading-relaxed">Cukup buka kamera, arahkan ke objek, dan AI akan langsung merangkai kalimat tenses dari objek tersebut.</div>
+      </div>
+      <div class="glass-card rounded-2xl p-4 border border-white/10">
+        <div class="font-bold text-white mb-1">Apakah data saya aman?</div>
+        <div class="text-slate-300 text-xs leading-relaxed">Sangat aman. Pemrosesan kamera dilakukan lokal tanpa pernah menyimpan foto ke server eksternal.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOTTOM CTA -->
+  <section class="py-20 bg-gradient-to-b from-[#181138] via-[#2A1F5E] to-[#140D33] border-t border-white/15 text-center">
+    <div class="max-w-4xl mx-auto px-4 space-y-6">
+      <h2 class="text-3xl sm:text-5xl font-extrabold text-white">Jadilah yang Pertama Merasakan Revolusi Belajar Ini.</h2>
+      <p class="text-slate-200 text-base max-w-xl mx-auto">Download sekarang di Google Play Store dan rasakan kemudahan menguasai 16 Tenses!</p>
+      <div>
+        <button onclick="openPlayModal()" class="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#FF6B81] to-[#e85068] hover:from-[#ff7e92] hover:to-[#FF6B81] text-white font-extrabold text-base shadow-xl">
+          📥 Download di Google Play
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL PLAY STORE -->
+  <div id="playModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="w-full max-w-md bg-[#16122E] border border-white/20 rounded-3xl p-6 space-y-5 text-center">
+      <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#6A5AE0] to-[#FF6B81] flex items-center justify-center text-3xl mx-auto shadow-lg">
+        📷
+      </div>
+      <h3 class="text-xl font-bold text-white">TenseGO: AI AR English</h3>
+      <p class="text-xs text-emerald-400">Versi 1.0.0 • Baru Rilis • 100% Gratis</p>
+      <div class="p-4 bg-black/40 rounded-xl text-xs text-slate-300">
+        Scan atau klik tombol di bawah untuk mengunduh paket aplikasi:
+      </div>
+      <button onclick="alert('Mengunduh APK TenseGO v1.0.0...'); closeModal();" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#FF6B81] to-[#e85068] text-white font-bold text-sm shadow-lg">
+        📥 Unduh Langsung APK (28 MB)
+      </button>
+      <button onclick="closeModal()" class="text-xs text-slate-400 hover:text-white">Tutup</button>
+    </div>
+  </div>
+
+  <!-- MODAL FEEDBACK -->
+  <div id="feedbackModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="w-full max-w-md bg-[#16122E] border border-white/20 rounded-3xl p-6 space-y-4">
+      <h3 class="text-lg font-bold text-white">Kirim Masukan ke Developer</h3>
+      <p class="text-xs text-slate-300">Masukanmu sangat berarti bagi pengembangan aplikasi TenseGO:</p>
+      <input type="text" placeholder="Nama Anda" class="w-full p-2.5 rounded-xl bg-black/40 border border-white/10 text-xs text-white" />
+      <textarea rows="3" placeholder="Saran atau fitur yang kamu inginkan..." class="w-full p-2.5 rounded-xl bg-black/40 border border-white/10 text-xs text-white"></textarea>
+      <button onclick="alert('Terima kasih atas masukanmu!'); closeFeedbackModal();" class="w-full py-2.5 rounded-xl bg-brandPurple text-white font-bold text-xs">
+        Kirim Masukan
+      </button>
+      <button onclick="closeFeedbackModal()" class="w-full text-center text-xs text-slate-400">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    function openPlayModal() {
+      document.getElementById('playModal').classList.remove('hidden');
+    }
+    function closeModal() {
+      document.getElementById('playModal').classList.add('hidden');
+    }
+    function openFeedbackModal() {
+      document.getElementById('feedbackModal').classList.remove('hidden');
+    }
+    function closeFeedbackModal() {
+      document.getElementById('feedbackModal').classList.add('hidden');
+    }
+    function switchPhoneTab(tab) {
+      if (tab === 'ar') {
+        document.getElementById('phoneViewAR').classList.remove('hidden');
+        document.getElementById('phoneViewChat').classList.add('hidden');
+        document.getElementById('tabBtnAR').className = 'py-1.5 rounded-lg bg-brandPurple text-white transition-all';
+        document.getElementById('tabBtnChat').className = 'py-1.5 rounded-lg text-slate-400 hover:text-white transition-all';
+      } else {
+        document.getElementById('phoneViewAR').classList.add('hidden');
+        document.getElementById('phoneViewChat').classList.remove('hidden');
+        document.getElementById('tabBtnAR').className = 'py-1.5 rounded-lg text-slate-400 hover:text-white transition-all';
+        document.getElementById('tabBtnChat').className = 'py-1.5 rounded-lg bg-brandPurple text-white transition-all';
+      }
+    }
+    function setARItem(id, emoji, label, sentence, tense, formula) {
+      document.getElementById('arObjEmoji').innerText = emoji;
+      document.getElementById('arObjLabel').innerText = 'Scan: ' + label;
+      document.getElementById('arEnglishText').innerHTML = '&ldquo;' + sentence + '&rdquo;';
+      document.getElementById('arTenseType').innerText = tense + ':';
+      document.getElementById('arFormula').innerText = 'Pola: ' + formula;
+    }
+    function sendQuickChat(topic) {
+      const box = document.getElementById('chatBox');
+      if (topic === 'was vs has been') {
+        box.innerHTML += '<div class="p-2 rounded-xl bg-brandPurple text-white ml-6">Apa bedanya "was" vs "has been"?</div>';
+        setTimeout(() => {
+          box.innerHTML += '<div class="p-2 rounded-xl bg-[#1C163C] text-slate-200 mr-6">"I was sick" = dulu sakit, sekarang sudah sembuh. "I have been sick" = sakit dari kemarin dan masih sakit sekarang!</div>';
+          box.scrollTop = box.scrollHeight;
+        }, 500);
+      } else {
+        box.innerHTML += '<div class="p-2 rounded-xl bg-brandPurple text-white ml-6">Kapan pakai Past Perfect?</div>';
+        setTimeout(() => {
+          box.innerHTML += '<div class="p-2 rounded-xl bg-[#1C163C] text-slate-200 mr-6">Past Perfect (had + V3) dipakai untuk peristiwa yang LEBIH DULU terjadi sebelum aksi lampau lainnya dimulai.</div>';
+          box.scrollTop = box.scrollHeight;
+        }, 500);
+      }
+    }
+  </script>
+</body>
+</html>
