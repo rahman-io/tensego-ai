@@ -911,6 +911,13 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* Wavy Bottom Divider matching app UI */}
+        <div className="absolute bottom-0 left-0 right-0 overflow-hidden leading-none pointer-events-none">
+          <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="relative block w-full h-12 sm:h-20 text-[#0A0814] fill-current opacity-90">
+            <path d="M0,0 C150,90 350,-40 500,60 C650,160 900,10 1200,40 L1200,120 L0,120 Z"></path>
+          </svg>
+        </div>
       </section>
 
       {/* ------------------------------------------------------------- */}
@@ -935,6 +942,140 @@ export default function App() {
             </div>
             <div className="flex items-center gap-2 font-bold text-lg sm:text-xl text-white">
               <FAIcon name="fa-shield-halved" className="w-5 h-5 text-emerald-400" /> Play Protect Verified
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ------------------------------------------------------------- */}
+      {/* COMPARISON WITH OTHER APP APPROACHES (Without Brand Names)      */}
+      {/* ------------------------------------------------------------- */}
+      <section className="py-20 bg-gradient-to-b from-[#0A0814] via-[#15102B] to-[#0A0814] relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="max-w-3xl mx-auto text-center space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#8A4FFF]/20 border border-[#8A4FFF]/40 text-[#A26BFF] text-xs font-semibold uppercase tracking-wider">
+              <FAIcon name="fa-scale-balanced" className="w-3.5 h-3.5" />
+              Perbandingan Pendekatan Belajar
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
+              Mengapa TenseGO Jauh Lebih Efektif Dibanding Aplikasi Lain?
+            </h2>
+            <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
+              Banyak aplikasi belajar bahasa di pasaran yang berfokus pada hafalan kata harian atau obrolan bebas tanpa arah. Berikut perbandingan objektif pendekatan TenseGO dibanding kategori aplikasi lain:
+            </p>
+          </div>
+
+          {/* Comparison Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Competitor 1: Gamified Apps */}
+            <div className="glass-card-reference rounded-3xl p-6 border border-white/10 space-y-5 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-2xl bg-amber-500/20 text-amber-300 flex items-center justify-center font-bold">
+                  <FAIcon name="fa-gamepad" className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Aplikasi Gamifikasi Klasik</h3>
+                <p className="text-xs text-slate-400">
+                  Fokus pada poin, streak harian, dan terjemahan kata acak tanpa kurikulum 16 tenses yang utuh.
+                </p>
+              </div>
+              <ul className="space-y-2.5 text-xs text-slate-300 border-t border-white/10 pt-4">
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>Tidak ada 16 Tenses komprehensif</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>Tanpa kamera AR objek fisik</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-check" className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Pilihan ganda &amp; kuis singkat</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Competitor 2: General AI Chatbots */}
+            <div className="glass-card-reference rounded-3xl p-6 border border-white/10 space-y-5 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-2xl bg-indigo-500/20 text-indigo-300 flex items-center justify-center font-bold">
+                  <FAIcon name="fa-comments" className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Chatbot AI Umum</h3>
+                <p className="text-xs text-slate-400">
+                  Asisten percakapan umum tanpa panduan struktur tata bahasa atau skenario belajar terarah.
+                </p>
+              </div>
+              <ul className="space-y-2.5 text-xs text-slate-300 border-t border-white/10 pt-4">
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>Tidak ada kurikulum grammar tuntas</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>Minim koreksi struktur kalimat</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-check" className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Obrolan bebas tanpa konteks</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Competitor 3: Pronunciation Only Apps */}
+            <div className="glass-card-reference rounded-3xl p-6 border border-white/10 space-y-5 flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-2xl bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold">
+                  <FAIcon name="fa-microphone-lines" className="w-5 h-5" />
+                </div>
+                <h3 className="text-lg font-bold text-white">Aplikasi Pelatih Fonetik</h3>
+                <p className="text-xs text-slate-400">
+                  Fokus mengecek pengucapan kata atau kalimat pendek terisolasi tanpa visualisasi kontekstual.
+                </p>
+              </div>
+              <ul className="space-y-2.5 text-xs text-slate-300 border-t border-white/10 pt-4">
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>Hanya fokus pelafalan kata</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0" />
+                  <span>Tanpa simulasi AR benda sekitar</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-check" className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Skor akurasi fonetik saja</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* TENSEGO (Winner / Highlighted Card) */}
+            <div className="rounded-3xl p-6 bg-gradient-to-b from-[#8A4FFF] to-[#5926C8] border-2 border-white/30 space-y-5 flex flex-col justify-between shadow-2xl shadow-[#8A4FFF]/40 relative overflow-hidden">
+              <div className="absolute top-0 right-0 bg-white/20 px-3 py-1 rounded-bl-2xl text-[10px] font-extrabold uppercase tracking-widest text-white">
+                Pilihan Terbaik
+              </div>
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-2xl bg-white text-[#8A4FFF] flex items-center justify-center font-bold shadow-lg">
+                  <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="TenseGO" className="w-6 h-6 object-contain" />
+                </div>
+                <h3 className="text-lg font-bold text-white">TenseGO (AI + AR)</h3>
+                <p className="text-xs text-purple-100">
+                  Ekosistem lengkap menguasai 16 tenses dengan kamera AR benda nyata &amp; Tutor AI Cosmo 24/7.
+                </p>
+              </div>
+              <ul className="space-y-2.5 text-xs text-white border-t border-white/20 pt-4 font-semibold">
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-circle-check" className="w-4 h-4 text-emerald-300 shrink-0" />
+                  <span>Lengkap 16 Tenses (Present, Past, Future...)</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-circle-check" className="w-4 h-4 text-emerald-300 shrink-0" />
+                  <span>Kamera AR Scan Benda Sekitar Real-time</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <FAIcon name="fa-circle-check" className="w-4 h-4 text-emerald-300 shrink-0" />
+                  <span>Tutor AI Cosmo 24/7 + Personalisasi Level</span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
