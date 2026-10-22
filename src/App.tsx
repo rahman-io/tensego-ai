@@ -2205,9 +2205,18 @@ export default function App() {
             <p className="text-xs text-slate-300">Kirim masukan atau ide fitur secara langsung ke tim pengembang:</p>
 
             {feedbackSent ? (
-              <div className="p-4 bg-emerald-500/20 text-emerald-200 rounded-2xl text-xs text-center space-y-2">
-                <div className="font-bold text-white">Terima Kasih!</div>
-                <div>Masukanmu sudah terkirim langsung ke email developer.</div>
+              <div className="p-4 bg-emerald-500/20 text-emerald-200 rounded-2xl text-xs text-center space-y-3">
+                <div className="font-bold text-white text-sm">Terima Kasih!</div>
+                <div>Masukanmu telah direkam. Agar pesan terkirim langsung ke email tim pengembang (<strong className="text-white">tensego.official@gmail.com</strong>), klik tombol di bawah untuk membuka aplikasi email Anda:</div>
+                <a
+                  href={`mailto:tensego.official@gmail.com?subject=${encodeURIComponent(`[Feedback TenseGO] dari ${feedbackForm.name} (${feedbackForm.email})`)}&body=${encodeURIComponent(`Nama: ${feedbackForm.name}\nEmail: ${feedbackForm.email}\nLevel: ${feedbackForm.level}\n\nPesan / Masukan:\n${feedbackForm.message}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 transition-colors shadow-lg"
+                >
+                  <FAIcon name="fa-envelope" className="w-4 h-4" />
+                  <span>Kirim Langsung ke tensego.official@gmail.com</span>
+                </a>
               </div>
             ) : (
               <form onSubmit={handleFeedbackSubmit} className="space-y-3 text-xs">
