@@ -2,5 +2,7 @@
   "name": "TenseGO - Belajar Grammar 16 Tenses dengan AI & AR",
   "description": "Aplikasi Android inovatif untuk menguasai 16 Tenses Bahasa Inggris melalui Augmented Reality (AR) dan Tutor AI interaktif 24/7.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

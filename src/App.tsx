@@ -1,32 +1,8 @@
 import React, { useState, useId } from 'react';
-import {
-  Camera,
-  Bot,
-  Sparkles,
-  BookOpen,
-  Smartphone,
-  CheckCircle2,
-  XCircle,
-  ArrowRight,
-  ChevronDown,
-  Download,
-  QrCode,
-  MessageSquare,
-  HelpCircle,
-  Send,
-  Volume2,
-  Layers,
-  ShieldCheck,
-  Zap,
-  Check,
-  X,
-  Target,
-  RefreshCw,
-  Eye,
-  Sliders,
-  Star,
-  ArrowUpRight
-} from 'lucide-react';
+
+const FAIcon = ({ name, className = '' }: { name: string; className?: string }) => {
+  return <i className={`fa-solid ${name} ${className}`}></i>;
+};
 
 // Real Google Play Store App Link
 const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=id.replace.tensegoai";
@@ -107,7 +83,7 @@ const AR_OBJECTS: ARObject[] = [
     id: 'coffee',
     name: 'Coffee Mug',
     indonesianName: 'Cangkir Kopi Panas',
-    icon: '☕',
+    icon: 'fa-mug-hot',
     confidence: 99.4,
     tags: ['Ceramic', 'Hot Liquid', 'Breakfast', 'Steam'],
     tensesExamples: [
@@ -138,7 +114,7 @@ const AR_OBJECTS: ARObject[] = [
     id: 'laptop',
     name: 'Workstation Laptop',
     indonesianName: 'Laptop Kerja',
-    icon: '💻',
+    icon: 'fa-laptop',
     confidence: 98.7,
     tags: ['Electronics', 'Display', 'Keyboard', 'Study'],
     tensesExamples: [
@@ -162,7 +138,7 @@ const AR_OBJECTS: ARObject[] = [
     id: 'plant',
     name: 'Monstera Plant',
     indonesianName: 'Tanaman Monstera',
-    icon: '🌿',
+    icon: 'fa-seedling',
     confidence: 97.9,
     tags: ['Foliage', 'Flora', 'Chlorophyll', 'Decor'],
     tensesExamples: [
@@ -186,7 +162,7 @@ const AR_OBJECTS: ARObject[] = [
     id: 'shoes',
     name: 'Running Shoes',
     indonesianName: 'Sepatu Lari Sporty',
-    icon: '👟',
+    icon: 'fa-shoe-prints',
     confidence: 99.1,
     tags: ['Footwear', 'Athletic', 'Cushion'],
     tensesExamples: [
@@ -366,7 +342,7 @@ const SAMPLE_CHAT_FLOWS = [
   {
     promptLabel: 'Bedanya "was" vs "has been"?',
     question: 'Tutor, apa bedanya "I was sick" dengan "I have been sick"?',
-    response: '• "I was sick" = Kamu sakit di masa lalu, sekarang SUDAH SEHAT.\n• "I have been sick" = Kamu sakit dari kemarin dan sampai detik ini MASIH SAKIT.\n\nKuncinya: Apakah ada dampaknya sampai saat ini!',
+    response: '- "I was sick" = Kamu sakit di masa lalu, sekarang SUDAH SEHAT.\n- "I have been sick" = Kamu sakit dari kemarin dan sampai detik ini MASIH SAKIT.\n\nKuncinya: Apakah ada dampaknya sampai saat ini!',
     highlight: 'Simple Past = Selesai total. Present Perfect = Nyambung ke sekarang.'
   },
   {
@@ -414,6 +390,8 @@ export default function App() {
   const [activeLightboxImg, setActiveLightboxImg] = useState<string | null>(null);
   const [showPlayStoreModal, setShowPlayStoreModal] = useState(false);
   const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [activeInfoTab, setActiveInfoTab] = useState<'desc' | 'terms' | 'refund' | 'contact'>('desc');
   const [feedbackSent, setFeedbackSent] = useState(false);
   const [feedbackForm, setFeedbackForm] = useState({
     name: '',
@@ -536,29 +514,16 @@ export default function App() {
             </span>
           </a>
 
-          {/* Center Segmented Glass Nav Capsule (exact match to reference screenshot) */}
+          {/* Center Segmented Glass Nav Capsule (exact 4 items) */}
           <nav className="hidden lg:flex items-center p-1.5 glass-nav-capsule text-xs font-medium text-slate-300">
             <a href="#" className="px-4 py-2 rounded-full bg-[#8A4FFF] text-white font-semibold shadow-md">
               Beranda
             </a>
-            <a href="#fitur-ar" className="px-4 py-2 rounded-full hover:text-white transition-colors">
-              Kamera AR
-            </a>
             <a href="#tutor-ai" className="px-4 py-2 rounded-full hover:text-white transition-colors">
               Tutor AI 24/7
             </a>
-            <a href="#preferensi" className="px-4 py-2 rounded-full hover:text-[#E85AA0] transition-colors">
-              Personalisasi AI
-            </a>
-            <a href="#harga" className="px-4 py-2 rounded-full hover:text-white transition-colors flex items-center gap-1.5 font-bold text-amber-300">
-              <span>Paket Harga</span>
-              <span className="text-[9px] bg-amber-500/30 text-amber-300 px-1.5 py-0.2 rounded-full border border-amber-500/40">5x Trial</span>
-            </a>
-            <a href="#16-tenses" className="px-4 py-2 rounded-full hover:text-white transition-colors">
-              16 Tenses
-            </a>
-            <a href="#cara-kerja" className="px-4 py-2 rounded-full hover:text-white transition-colors">
-              Cara Kerja
+            <a href="#harga" className="px-4 py-2 rounded-full hover:text-white transition-colors font-medium">
+              Paket Harga
             </a>
             <a href="#faq" className="px-4 py-2 rounded-full hover:text-white transition-colors">
               FAQ
@@ -582,7 +547,7 @@ export default function App() {
               className="px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] hover:from-[#9861FF] hover:to-[#B37EFF] shadow-lg shadow-[#8A4FFF]/35 transition-all flex items-center gap-2 active:scale-95 shrink-0"
             >
               <span>Download Play Store</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <FAIcon name="fa-arrow-up-right-from-square" className="w-4 h-4" />
             </a>
 
             {/* Mobile Menu Toggle */}
@@ -591,7 +556,7 @@ export default function App() {
               className="lg:hidden p-2 text-slate-300 rounded-full bg-white/10 border border-white/15"
               aria-label="Toggle Menu"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+              {mobileMenuOpen ? <FAIcon name="fa-xmark" className="w-5 h-5" /> : <FAIcon name="fa-chevron-down" className="w-5 h-5" />}
             </button>
           </div>
         </div>
@@ -600,11 +565,11 @@ export default function App() {
         {mobileMenuOpen && (
           <div className="lg:hidden max-w-7xl mx-auto mt-3 p-4 rounded-3xl glass-card-reference space-y-2">
             <a
-              href="#fitur-ar"
+              href="#"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-2 rounded-xl text-sm font-medium text-slate-200 hover:bg-white/10"
             >
-              Kamera AR
+              Beranda
             </a>
             <a
               href="#tutor-ai"
@@ -614,11 +579,11 @@ export default function App() {
               Tutor AI 24/7
             </a>
             <a
-              href="#16-tenses"
+              href="#harga"
               onClick={() => setMobileMenuOpen(false)}
               className="block px-4 py-2 rounded-xl text-sm font-medium text-slate-200 hover:bg-white/10"
             >
-              16 Tenses
+              Paket Harga
             </a>
             <a
               href="#faq"
@@ -646,10 +611,10 @@ export default function App() {
       <section className="relative pt-8 pb-20 md:pt-16 md:pb-28 overflow-hidden">
         {/* Background Sparkle Line Art Accents (from reference screenshot) */}
         <div className="absolute top-20 right-1/3 text-white/20 select-none pointer-events-none text-3xl animate-pulse">
-          ✧
+          <FAIcon name="fa-sparkles" />
         </div>
         <div className="absolute top-1/2 left-10 text-white/15 select-none pointer-events-none text-4xl">
-          ✦
+          <FAIcon name="fa-star" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -659,7 +624,8 @@ export default function App() {
               {/* Kicker Tag with Dot Indicator & Cosmo Buddy Mascot */}
               <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#A26BFF]">
                 <span className="w-2 h-2 rounded-full bg-[#A26BFF] animate-ping" />
-                <span>• Aplikasi Android Belajar Grammar AI &amp; AR</span>
+                <FAIcon name="fa-circle" className="text-[6px] text-[#A26BFF] mx-1" />
+                <span>Aplikasi Android Belajar Grammar AI &amp; AR</span>
               </div>
 
               {/* Cosmo Buddy Talking Mascot Banner */}
@@ -697,7 +663,7 @@ export default function App() {
                 
                 <div className="p-4 rounded-2xl bg-[#8A4FFF]/10 border border-[#8A4FFF]/30 backdrop-blur-sm text-left max-w-xl mx-auto lg:mx-0">
                   <div className="flex items-center gap-2 text-xs font-bold text-[#E85AA0] uppercase tracking-wider mb-1">
-                    <Sparkles className="w-3.5 h-3.5 text-[#E85AA0]" />
+                    <FAIcon name="fa-wand-magic-sparkles" className="w-3.5 h-3.5 text-[#E85AA0]" />
                     <span>Atur Preferensi Belajar Sesuai Gaya Kamu</span>
                   </div>
                   <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium">
@@ -717,7 +683,7 @@ export default function App() {
                 >
                   <span>Download Play Store</span>
                   <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    <FAIcon name="fa-arrow-up-right-from-square" className="w-3.5 h-3.5" />
                   </div>
                 </a>
 
@@ -726,7 +692,7 @@ export default function App() {
                   href="#demo-interactive"
                   className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-white/5 hover:bg-white/10 text-slate-200 font-semibold text-sm border border-white/20 transition-all flex items-center justify-center gap-2"
                 >
-                  <Eye className="w-4 h-4 text-[#A26BFF]" />
+                  <FAIcon name="fa-eye" className="w-4 h-4 text-[#A26BFF]" />
                   <span>Coba Demo AR &amp; Tutor AI</span>
                 </a>
               </div>
@@ -735,7 +701,7 @@ export default function App() {
               <div className="pt-8 border-t border-white/10 grid grid-cols-3 gap-4 text-left">
                 <div>
                   <div className="flex items-center gap-1.5 text-lg sm:text-2xl font-extrabold text-white">
-                    <BookOpen className="w-4 h-4 text-[#A26BFF]" />
+                    <FAIcon name="fa-book-open" className="w-4 h-4 text-[#A26BFF]" />
                     <span>16</span>
                   </div>
                   <div className="text-xs text-slate-400 mt-0.5">Rumus Tenses</div>
@@ -751,7 +717,7 @@ export default function App() {
 
                 <div>
                   <div className="flex items-center gap-1.5 text-lg sm:text-2xl font-extrabold text-white">
-                    <Zap className="w-4 h-4 text-emerald-400" />
+                    <FAIcon name="fa-bolt" className="w-4 h-4 text-emerald-400" />
                     <span>0.2s</span>
                   </div>
                   <div className="text-xs text-slate-400 mt-0.5">Kecepatan AR</div>
@@ -775,7 +741,7 @@ export default function App() {
                 {/* Simulated AR Viewport */}
                 <div className="relative h-44 bg-gradient-to-b from-[#181232] to-[#0A0717] rounded-2xl border border-white/10 p-3 flex flex-col items-center justify-center text-center overflow-hidden">
                   <div className="text-4xl select-none filter drop-shadow-[0_0_12px_rgba(162,107,255,0.7)] mb-1">
-                    {selectedARObject.icon}
+                    <FAIcon name={selectedARObject.icon} className="text-4xl text-[#A26BFF]" />
                   </div>
                   <div className="px-2.5 py-0.5 rounded-full bg-[#8A4FFF] text-white text-[11px] font-bold">
                     {selectedARObject.indonesianName}
@@ -795,13 +761,13 @@ export default function App() {
                         setSelectedARObject(obj);
                         setSelectedTenseIndex(0);
                       }}
-                      className={`px-2 py-1 rounded-lg text-[11px] font-semibold shrink-0 transition-colors ${
+                      className={`px-2 py-1 rounded-lg text-[11px] font-semibold shrink-0 transition-colors flex items-center gap-1 ${
                         selectedARObject.id === obj.id
                           ? 'bg-[#8A4FFF] text-white'
                           : 'bg-white/10 text-slate-300 hover:bg-white/20'
                       }`}
                     >
-                      {obj.icon} {obj.name.split(' ')[0]}
+                      <FAIcon name={obj.icon} className="text-xs" /> {obj.name.split(' ')[0]}
                     </button>
                   ))}
                 </div>
@@ -831,7 +797,7 @@ export default function App() {
                 {/* Floating Glass Translucent Badge Overlay */}
                 <div className="p-2.5 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20 text-xs flex items-center gap-2 text-slate-100 shadow-lg">
                   <div className="w-5 h-5 rounded-full bg-emerald-400/20 text-emerald-300 flex items-center justify-center font-bold text-[10px] shrink-0">
-                    ✓
+                    <FAIcon name="fa-check" className="w-3 h-3 text-emerald-300" />
                   </div>
                   <span className="font-semibold text-[11px]">Personalized Grammar Paths</span>
                 </div>
@@ -853,9 +819,9 @@ export default function App() {
                     <button
                       key={idx}
                       onClick={() => handleSendPresetChat(flow)}
-                      className="text-[10px] px-2 py-1 rounded-md bg-white/10 hover:bg-[#8A4FFF] text-slate-300 hover:text-white shrink-0 transition-colors"
+                      className="text-[10px] px-2 py-1 rounded-md bg-white/10 hover:bg-[#8A4FFF] text-slate-300 hover:text-white shrink-0 transition-colors flex items-center gap-1"
                     >
-                      💬 {flow.promptLabel}
+                      <FAIcon name="fa-comment-dots" className="text-xs text-[#A26BFF]" /> {flow.promptLabel}
                     </button>
                   ))}
                 </div>
@@ -872,11 +838,11 @@ export default function App() {
                   </div>
                   <div className="text-[10px] text-slate-300">Maskot &amp; Tutor Grammar 24 Jam</div>
                   <div className="flex items-center gap-0.5 text-amber-400 text-[10px] mt-0.5">
-                    <Star className="w-3 h-3 fill-amber-400" />
-                    <Star className="w-3 h-3 fill-amber-400" />
-                    <Star className="w-3 h-3 fill-amber-400" />
-                    <Star className="w-3 h-3 fill-amber-400" />
-                    <Star className="w-3 h-3 fill-amber-400" />
+                    <FAIcon name="fa-star" className="w-3 h-3 fill-amber-400" />
+                    <FAIcon name="fa-star" className="w-3 h-3 fill-amber-400" />
+                    <FAIcon name="fa-star" className="w-3 h-3 fill-amber-400" />
+                    <FAIcon name="fa-star" className="w-3 h-3 fill-amber-400" />
+                    <FAIcon name="fa-star" className="w-3 h-3 fill-amber-400" />
                     <span className="text-slate-300 text-[9px] ml-1">5.0</span>
                   </div>
                 </div>
@@ -898,16 +864,16 @@ export default function App() {
 
           <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-75 hover:opacity-100 transition-opacity">
             <div className="flex items-center gap-2 font-bold text-lg sm:text-xl text-white">
-              <Smartphone className="w-5 h-5 text-[#A26BFF]" /> Android 8.0+
+              <FAIcon name="fa-mobile-screen" className="w-5 h-5 text-[#A26BFF]" /> Android 8.0+
             </div>
             <div className="flex items-center gap-2 font-bold text-lg sm:text-xl text-white">
-              <Camera className="w-5 h-5 text-[#E85AA0]" /> Google ARCore
+              <FAIcon name="fa-camera" className="w-5 h-5 text-[#E85AA0]" /> Google ARCore
             </div>
             <div className="flex items-center gap-2 font-bold text-lg sm:text-xl text-white">
-              <Sparkles className="w-5 h-5 text-indigo-400" /> Gemini AI Engine
+              <FAIcon name="fa-wand-magic-sparkles" className="w-5 h-5 text-indigo-400" /> Gemini AI Engine
             </div>
             <div className="flex items-center gap-2 font-bold text-lg sm:text-xl text-white">
-              <ShieldCheck className="w-5 h-5 text-emerald-400" /> Play Protect Verified
+              <FAIcon name="fa-shield-halved" className="w-5 h-5 text-emerald-400" /> Play Protect Verified
             </div>
           </div>
         </div>
@@ -946,19 +912,19 @@ export default function App() {
           <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="glass-card-reference rounded-3xl p-6 sm:p-8 border border-red-500/20 bg-red-950/10 space-y-4">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <XCircle className="w-5 h-5 text-red-400" /> Cara Lama (Buku Hafalan Kaku)
+                <FAIcon name="fa-circle-xmark" className="w-5 h-5 text-red-400" /> Cara Lama (Buku Hafalan Kaku)
               </h3>
               <ul className="space-y-3 text-sm text-slate-300">
                 <li className="flex items-start gap-2">
-                  <X className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                   <span>Menghafal rumus S + V2 + O di luar kepala tanpa konteks nyata.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <X className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                   <span>Takut salah dan minder saat bercakap-cakap di depan umum.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <X className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
+                  <FAIcon name="fa-xmark" className="w-4 h-4 text-red-400 shrink-0 mt-0.5" />
                   <span>Sangat sulit membedakan 16 tenses yang mirip-mirip.</span>
                 </li>
               </ul>
@@ -966,19 +932,19 @@ export default function App() {
 
             <div className="glass-card-reference rounded-3xl p-6 sm:p-8 border border-[#8A4FFF]/40 bg-gradient-to-br from-[#1C163C]/80 to-[#120F24]/80 space-y-4">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <CheckCircle2 className="w-5 h-5 text-emerald-400" /> Cara TenseGO (AI &amp; Kamera AR)
+                <FAIcon name="fa-circle-check" className="w-5 h-5 text-emerald-400" /> Cara TenseGO (AI &amp; Kamera AR)
               </h3>
               <ul className="space-y-3 text-sm text-slate-200">
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <FAIcon name="fa-check" className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <span>Scan cangkir kopi atau laptop, seketika paham Present Continuous.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <FAIcon name="fa-check" className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <span>Tanya Tutor AI Cosmo 24/7 tanpa rasa takut dimarahi atau dihakimi.</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                  <FAIcon name="fa-check" className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
                   <span>Visualisasi real-time yang langsung melekat di memori ingatan.</span>
                 </li>
               </ul>
@@ -994,7 +960,7 @@ export default function App() {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#8A4FFF]/15 text-[#A26BFF] text-xs font-bold uppercase tracking-wider">
-            <Sparkles className="w-3.5 h-3.5" />
+            <FAIcon name="fa-wand-magic-sparkles" className="w-3.5 h-3.5" />
             Nilai Jual Utama TenseGO
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">
@@ -1005,8 +971,8 @@ export default function App() {
         {/* Feature 1 */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
-            <div className="text-xs font-bold text-[#E85AA0] uppercase tracking-wider flex items-center gap-2">
-              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-5 h-5 object-contain" /> Fitur 01 • Kamera Ajaib / AR
+            <div className="text-xs font-bold text-[#E85AA0] uppercase tracking-wider flex items-center gap-1.5">
+              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-5 h-5 object-contain" /> Fitur 01 <FAIcon name="fa-circle" className="text-[6px] text-[#E85AA0] mx-1" /> Kamera Ajaib / AR
             </div>
             <h3 className="text-2xl sm:text-3xl font-bold text-white">Belajar dari Apa yang Kamu Lihat</h3>
             <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
@@ -1027,7 +993,7 @@ export default function App() {
               <img src="assets/aistudio/1_45fe705c.webp" alt="Kamera AR TenseGO" className="h-full object-contain group-hover:scale-105 transition-transform duration-300" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4 text-left">
                 <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                  <Eye className="w-4 h-4 text-[#A26BFF]" /> Klik untuk Perbesar Tampilan Kamera AR
+                  <FAIcon name="fa-eye" className="w-4 h-4 text-[#A26BFF]" /> Klik untuk Perbesar Tampilan Kamera AR
                 </span>
               </div>
             </div>
@@ -1045,7 +1011,7 @@ export default function App() {
               <img src="assets/aistudio/6_570d530e.webp" alt="Tutor AI TenseGO" className="h-full object-contain group-hover:scale-105 transition-transform duration-300" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-4 text-left">
                 <span className="text-xs font-bold text-white flex items-center gap-1.5">
-                  <Eye className="w-4 h-4 text-[#E85AA0]" /> Klik untuk Perbesar Chat Tutor AI
+                  <FAIcon name="fa-eye" className="w-4 h-4 text-[#E85AA0]" /> Klik untuk Perbesar Chat Tutor AI
                 </span>
               </div>
             </div>
@@ -1055,8 +1021,8 @@ export default function App() {
             </p>
           </div>
           <div className="space-y-4 order-1 lg:order-2">
-            <div className="text-xs font-bold text-[#A26BFF] uppercase tracking-wider flex items-center gap-2">
-              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-5 h-5 object-contain" /> Fitur 02 • Tutor Chat AI
+            <div className="text-xs font-bold text-[#A26BFF] uppercase tracking-wider flex items-center gap-1.5">
+              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-5 h-5 object-contain" /> Fitur 02 <FAIcon name="fa-circle" className="text-[6px] text-[#A26BFF] mx-1" /> Tutor Chat AI
             </div>
             <h3 className="text-2xl sm:text-3xl font-bold text-white">Guru Privat Anti-Galak 24/7</h3>
             <p className="text-slate-300 leading-relaxed text-sm sm:text-base">
@@ -1077,8 +1043,8 @@ export default function App() {
         {/* Feature 3: Personalisasi & Preferensi Belajar (Matching screenshots) */}
         <div id="preferensi" className="pt-10 border-t border-white/10 space-y-10">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="text-xs font-bold text-[#A26BFF] uppercase tracking-wider flex items-center justify-center gap-2">
-              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-5 h-5 object-contain" /> Fitur 03 • Personalisasi Preferensi Belajar
+            <div className="text-xs font-bold text-[#A26BFF] uppercase tracking-wider flex items-center justify-center gap-1.5">
+              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo" className="w-5 h-5 object-contain" /> Fitur 03 <FAIcon name="fa-circle" className="text-[6px] text-[#A26BFF] mx-1" /> Personalisasi Preferensi Belajar
             </div>
             <h3 className="text-2xl sm:text-4xl font-extrabold text-white">
               Atur Preferensi Belajar Sesuai Gaya Kamu
@@ -1096,7 +1062,7 @@ export default function App() {
               <div className="glass-card-reference rounded-3xl p-5 border border-white/15 space-y-3">
                 <div className="flex items-center justify-between text-xs text-[#A26BFF] font-bold">
                   <span className="flex items-center gap-2">
-                    <Target className="w-4 h-4" /> 1. Pilih Tujuan Belajar:
+                    <FAIcon name="fa-bullseye" className="w-4 h-4" /> 1. Pilih Tujuan Belajar:
                   </span>
                   <span className="text-[10px] bg-[#8A4FFF]/20 px-2.5 py-0.5 rounded-full text-slate-200">
                     {selectedGoal}
@@ -1135,7 +1101,7 @@ export default function App() {
               <div className="glass-card-reference rounded-3xl p-5 border border-white/15 space-y-3">
                 <div className="flex items-center justify-between text-xs text-[#E85AA0] font-bold">
                   <span className="flex items-center gap-2">
-                    <Layers className="w-4 h-4" /> 2. Pilih Tema Belajar:
+                    <FAIcon name="fa-layer-group" className="w-4 h-4" /> 2. Pilih Tema Belajar:
                   </span>
                   <span className="text-[10px] bg-[#E85AA0]/20 px-2.5 py-0.5 rounded-full text-slate-200">
                     {selectedTheme}
@@ -1162,7 +1128,7 @@ export default function App() {
               <div className="glass-card-reference rounded-3xl p-5 border border-white/15 space-y-3">
                 <div className="flex items-center justify-between text-xs text-emerald-400 font-bold">
                   <span className="flex items-center gap-2">
-                    <Bot className="w-4 h-4" /> 3. Pilih Gaya Penjelasan AI:
+                    <FAIcon name="fa-robot" className="w-4 h-4" /> 3. Pilih Gaya Penjelasan AI:
                   </span>
                   <span className="text-[10px] bg-emerald-500/20 px-2.5 py-0.5 rounded-full text-slate-200">
                     Model: TenseGO Flux
@@ -1205,15 +1171,15 @@ export default function App() {
 
               {/* Dynamic Applied Tags */}
               <div className="flex flex-wrap gap-1.5 text-[10px]">
-                <span className="px-2 py-0.5 rounded-md bg-[#8A4FFF]/30 text-[#A26BFF] font-semibold">🎯 {selectedGoal}</span>
-                <span className="px-2 py-0.5 rounded-md bg-[#E85AA0]/30 text-pink-300 font-semibold">🏙️ {selectedTheme}</span>
-                <span className="px-2 py-0.5 rounded-md bg-emerald-500/30 text-emerald-300 font-semibold">🗣️ {selectedStyle}</span>
+                <span className="px-2 py-0.5 rounded-md bg-[#8A4FFF]/30 text-[#A26BFF] font-semibold flex items-center gap-1"><FAIcon name="fa-bullseye" className="text-[#A26BFF]" /> {selectedGoal}</span>
+                <span className="px-2 py-0.5 rounded-md bg-[#E85AA0]/30 text-pink-300 font-semibold flex items-center gap-1"><FAIcon name="fa-city" className="text-pink-300" /> {selectedTheme}</span>
+                <span className="px-2 py-0.5 rounded-md bg-emerald-500/30 text-emerald-300 font-semibold flex items-center gap-1"><FAIcon name="fa-comments" className="text-emerald-300" /> {selectedStyle}</span>
               </div>
 
               {/* Cosmo Generated Speech Output */}
               <div className="p-4 rounded-2xl bg-black/60 border border-white/10 space-y-2 text-xs leading-relaxed">
                 <div className="text-[#A26BFF] font-bold text-xs flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5" /> Contoh Penjelasan Hasil Preferensimu:
+                  <FAIcon name="fa-wand-magic-sparkles" className="w-3.5 h-3.5" /> Contoh Penjelasan Hasil Preferensimu:
                 </div>
                 <p className="text-slate-200">
                   {selectedGoal.includes('Kerja') || selectedGoal.includes('Bisnis')
@@ -1227,7 +1193,7 @@ export default function App() {
               </div>
 
               <div className="p-3 rounded-xl bg-white/5 border border-white/10 text-[11px] text-slate-300 flex items-center gap-2">
-                <Zap className="w-4 h-4 text-amber-400 shrink-0" />
+                <FAIcon name="fa-bolt" className="w-4 h-4 text-amber-400 shrink-0" />
                 <span>Pilih kombinasi apa saja saat belajar di Android, Cosmo Buddy akan menyesuaikan bahasanya secara otomatis!</span>
               </div>
 
@@ -1238,7 +1204,7 @@ export default function App() {
                 className="w-full py-3 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg hover:from-[#9861FF] hover:to-[#B37EFF] transition-all"
               >
                 <span>Coba Fitur Ini di Android (Gratis)</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <FAIcon name="fa-arrow-up-right-from-square" className="w-4 h-4" />
               </a>
             </div>
           </div>
@@ -1290,7 +1256,7 @@ export default function App() {
                   </div>
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <span className="px-4 py-2 rounded-full bg-[#8A4FFF] text-white text-xs font-bold flex items-center gap-1.5 shadow-xl">
-                      <Eye className="w-4 h-4" /> Perbesar Tampilan
+                      <FAIcon name="fa-eye" className="w-4 h-4" /> Perbesar Tampilan
                     </span>
                   </div>
                 </div>
@@ -1371,6 +1337,9 @@ export default function App() {
       <section id="cara-kerja" className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Semudah 1, 2, 3 untuk Mulai Fasih</h2>
+          <p className="text-slate-300 text-sm">
+            Alur belajar interaktif dari memilih tenses hingga bermain game AR yang seru.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
@@ -1379,9 +1348,9 @@ export default function App() {
               <div className="w-10 h-10 rounded-2xl bg-[#8A4FFF]/30 text-[#A26BFF] flex items-center justify-center font-bold">1</div>
               <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Step 1" className="w-8 h-8 object-contain" />
             </div>
-            <h3 className="text-base font-bold text-white">Atur Tujuan Belajarmu</h3>
+            <h3 className="text-base font-bold text-white">Pilih Tense &amp; Preferensi Belajar</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Pilih level (A1-C2) dan target harian (5-15 menit). Kosakata otomatis disesuaikan.
+              Sebelum masuk ke AR, pilih salah satu dari 16 tenses yang ingin kamu kuasai, atur target harian, tema materi, dan gaya penjelasan AI favoritmu.
             </p>
           </div>
 
@@ -1390,9 +1359,9 @@ export default function App() {
               <div className="w-10 h-10 rounded-2xl bg-[#E85AA0]/30 text-[#E85AA0] flex items-center justify-center font-bold">2</div>
               <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Step 2" className="w-8 h-8 object-contain" />
             </div>
-            <h3 className="text-base font-bold text-white">Scan Benda Sekitar (AR) atau Chat Tutor</h3>
+            <h3 className="text-base font-bold text-white">Dipandu AI Tutor &amp; Tanya via Chat</h3>
             <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
-              Nyalakan kamera untuk mengenali barang-barang di kamarmu, atau tanyakan rumus grammar ke AI.
+              Dapatkan pemahaman mendalam tentang rumus dan contoh tenses dari AI Tutor. Bebas tanyakan bagian mana pun yang kamu belum paham via fitur Chat 24/7.
             </p>
           </div>
 
@@ -1401,9 +1370,9 @@ export default function App() {
               <div className="w-10 h-10 rounded-2xl bg-[#8A4FFF]/30 text-[#A26BFF] flex items-center justify-center font-bold">3</div>
               <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Step 3" className="w-8 h-8 object-contain" />
             </div>
-            <h3 className="text-base font-bold text-white">Kuasai Tenses dengan Pede</h3>
+            <h3 className="text-base font-bold text-white">Praktek Kamera AR &amp; Game AR Seru</h3>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-              Dapatkan evaluasi instan tanpa minder dan latih refleks bahasa Inggrismu!
+              Aktifkan kamera AR untuk memindai benda sekitar menjadi contoh kalimat nyata, atau mainkan Game AR interaktif untuk mengasah pemahamanmu!
             </p>
           </div>
         </div>
@@ -1417,8 +1386,8 @@ export default function App() {
           {/* Section Header & Mascot Callout */}
           <div className="text-center max-w-3xl mx-auto space-y-4">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#8A4FFF]/20 border border-[#8A4FFF]/40 text-[#A26BFF] text-xs font-bold uppercase tracking-wider">
-              <Sparkles className="w-4 h-4 text-[#E85AA0]" />
-              <span>Paket Berlangganan &amp; 5x Trial Gratis</span>
+              <FAIcon name="fa-wand-magic-sparkles" className="w-4 h-4 text-[#E85AA0]" />
+              <span>Paket Berlangganan &amp; Akses Gratis dengan Ketentuan</span>
             </div>
 
             <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
@@ -1426,7 +1395,7 @@ export default function App() {
             </h2>
 
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              Mulai secara <strong className="text-emerald-400">100% Gratis dengan 5x Kesempatan Trial</strong> di HP Android. Tingkatkan ke paket PRO atau Ultimate untuk bertanya ke Tutor AI tanpa batas!
+              Mulai secara <strong className="text-emerald-400">Gratis dengan Ketentuan</strong> di HP Android. Tingkatkan ke paket PRO atau Ultimate untuk bertanya ke Tutor AI tanpa batas!
             </p>
 
             {/* Cosmo Buddy Pricing Banner */}
@@ -1437,10 +1406,10 @@ export default function App() {
               <div className="text-xs space-y-1">
                 <div className="font-bold text-[#A26BFF] flex items-center gap-2">
                   <span>Cosmo Buddy</span>
-                  <span className="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/30">5x Free Trial Active</span>
+                  <span className="text-[10px] bg-amber-400/20 text-amber-300 px-2 py-0.5 rounded-full border border-amber-400/30">Gratis S&amp;K</span>
                 </div>
                 <p className="text-slate-200 leading-snug">
-                  &ldquo;Ayo manfaatkan 5x trial gratismu dulu! Setelah puas, kamu bisa pilih paket bulanan hemat atau langganan seumur hidup!&rdquo;
+                  &ldquo;Kamu bisa mulai belajar secara gratis dengan ketentuan yang berlaku! Setelah itu, pilih paket bulanan hemat atau langganan seumur hidup!&rdquo;
                 </p>
               </div>
             </div>
@@ -1448,32 +1417,32 @@ export default function App() {
 
           {/* Pricing Grid (3 Cards matching Screenshots) */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch max-w-6xl mx-auto">
-            {/* Card 1: TenseGo Basic (Trial) */}
+            {/* Card 1: TenseGo Basic */}
             <div className="glass-card-reference rounded-3xl p-7 border border-white/15 bg-white/5 space-y-6 flex flex-col justify-between relative opacity-90 hover:opacity-100 transition-opacity">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">TenseGo Basic (Trial)</span>
+                  <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">TenseGo Basic</span>
                   <span className="text-[10px] bg-slate-700/60 text-slate-300 px-2.5 py-1 rounded-full border border-white/10 font-mono">
-                    KUOTA HABIS (5/5)
+                    GRATIS DENGAN KETENTUAN
                   </span>
                 </div>
 
                 <div>
                   <div className="text-3xl font-extrabold text-white">Gratis</div>
-                  <div className="text-xs text-slate-400 mt-1">Dapatkan 5x percobaan AI &amp; Kamera AR gratis saat pertama install.</div>
+                  <div className="text-xs text-slate-400 mt-1">Nikmati akses awal gratis dengan ketentuan yang berlaku di aplikasi Android.</div>
                 </div>
 
                 <div className="pt-4 border-t border-white/10 space-y-3 text-xs">
                   <div className="flex items-start gap-2 text-slate-400">
-                    <XCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
-                    <span>Akses AI (Terkunci setelah 5x trial)</span>
+                    <FAIcon name="fa-circle-xmark" className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <span>Akses AI (Sesuai Ketentuan Aplikasi)</span>
                   </div>
                   <div className="flex items-start gap-2 text-slate-400">
-                    <XCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
-                    <span>Personalisasi Materi (Terkunci)</span>
+                    <FAIcon name="fa-circle-xmark" className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <span>Personalisasi Materi Terbatas</span>
                   </div>
                   <div className="flex items-start gap-2 text-slate-400">
-                    <XCircle className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
+                    <FAIcon name="fa-circle-xmark" className="w-4 h-4 text-slate-500 shrink-0 mt-0.5" />
                     <span>Terdapat Iklan</span>
                   </div>
                 </div>
@@ -1485,7 +1454,7 @@ export default function App() {
                 rel="noopener noreferrer"
                 className="w-full py-3 rounded-full bg-white/10 hover:bg-white/15 text-slate-300 font-semibold text-xs text-center border border-white/10 transition-colors block"
               >
-                Paket Saat Ini (Coba Gratis)
+                Mulai Gratis
               </a>
             </div>
 
@@ -1493,7 +1462,7 @@ export default function App() {
             <div className="glass-card-reference rounded-3xl p-8 border-2 border-[#8A4FFF] bg-gradient-to-b from-[#24174D] via-[#1A1138] to-[#120B29] space-y-6 flex flex-col justify-between relative shadow-2xl shadow-[#8A4FFF]/30 scale-100 lg:scale-105 z-10">
               {/* Top Banner Tag */}
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-slate-950 font-extrabold text-[11px] uppercase tracking-wider shadow-lg border border-amber-300 flex items-center gap-1.5 shrink-0 whitespace-nowrap">
-                <Sparkles className="w-3.5 h-3.5" /> PENAWARAN TERBATAS
+                <FAIcon name="fa-wand-magic-sparkles" className="w-3.5 h-3.5" /> PENAWARAN TERBATAS
               </div>
 
               <div className="space-y-5 pt-2">
@@ -1511,23 +1480,23 @@ export default function App() {
                     <span className="text-3xl sm:text-4xl font-extrabold text-white">Rp 29.000</span>
                     <span className="text-xs text-slate-300 font-medium">/ bln</span>
                   </div>
-                  <div className="mt-2 text-[11px] font-bold text-amber-300 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20 inline-block">
-                    🔥 HEMAT HINGGA 85%
+                  <div className="mt-2 text-[11px] font-bold text-amber-300 bg-amber-500/10 px-3 py-1 rounded-lg border border-amber-500/20 inline-block flex items-center gap-1">
+                    <FAIcon name="fa-fire" className="text-amber-400" /> HEMAT HINGGA 85%
                   </div>
                 </div>
 
                 {/* Checklist (Exact Screenshot Match) */}
                 <div className="pt-4 border-t border-white/15 space-y-3 text-xs">
                   <div className="flex items-center gap-2 text-slate-100 font-medium">
-                    <CheckCircle2 className="w-4 h-4 text-[#8A4FFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#8A4FFF] shrink-0" />
                     <span>Tanya AI Sepuasnya (60x/Bulan)</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-100 font-medium">
-                    <CheckCircle2 className="w-4 h-4 text-[#8A4FFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#8A4FFF] shrink-0" />
                     <span>Personalisasi Materi Tak Terbatas</span>
                   </div>
                   <div className="flex items-center gap-2 text-slate-100 font-medium">
-                    <CheckCircle2 className="w-4 h-4 text-[#8A4FFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#8A4FFF] shrink-0" />
                     <span>Belajar Fokus (Bebas Iklan)</span>
                   </div>
                 </div>
@@ -1540,7 +1509,7 @@ export default function App() {
                 className="w-full py-4 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#E85AA0] hover:from-[#9861FF] hover:to-[#F36DB1] text-white font-extrabold text-sm shadow-xl shadow-[#8A4FFF]/40 text-center transition-all flex items-center justify-center gap-2 active:scale-95"
               >
                 <span>Ambil Akses PRO Sekarang</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <FAIcon name="fa-arrow-up-right-from-square" className="w-4 h-4" />
               </a>
             </div>
 
@@ -1604,31 +1573,31 @@ export default function App() {
                 {/* Ultimate Checklist (Exact Screenshot Match) */}
                 <div className="pt-2 space-y-2.5 text-xs text-slate-200">
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#A26BFF] shrink-0" />
                     <span>Tanya AI Sepuasnya (300x/Bulan)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#A26BFF] shrink-0" />
                     <span>Personalisasi Materi Tak Terbatas</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#A26BFF] shrink-0" />
                     <span>Belajar Fokus (Bebas Iklan)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#A26BFF] shrink-0" />
                     <span>Analisa Gaya Belajar AI</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#A26BFF] shrink-0" />
                     <span>Prioritas Respon AI (Lebih Cepat)</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#A26BFF] shrink-0" />
                     <span>Akses Fitur Baru Duluan</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#A26BFF] shrink-0" />
+                    <FAIcon name="fa-circle-check" className="w-4 h-4 text-[#A26BFF] shrink-0" />
                     <span>Badge Profil Eksklusif</span>
                   </div>
                 </div>
@@ -1673,9 +1642,9 @@ export default function App() {
 
               <button
                 onClick={() => setShowFeedbackModal(true)}
-                className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/20"
+                className="px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-semibold border border-white/20 flex items-center gap-1.5"
               >
-                💬 Kirim Masukan Developer
+                <FAIcon name="fa-comment-medical" className="text-indigo-400" /> Kirim Masukan Developer
               </button>
             </div>
           </div>
@@ -1688,26 +1657,34 @@ export default function App() {
       <section id="faq" className="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="text-center space-y-2">
           <h2 className="text-3xl font-extrabold text-white">Frequently Asked Questions</h2>
-          <p className="text-slate-400 text-sm">Informasi penting seputar aplikasi TenseGO</p>
+          <p className="text-slate-400 text-sm">Informasi penting seputar alur belajar, fitur AR, dan paket harga TenseGO</p>
         </div>
 
         <div className="space-y-3 text-sm">
           {[
             {
-              q: 'Apakah TenseGO gratis diunduh di Google Play?',
-              a: 'Ya, TenseGO 100% gratis diunduh. Sebagai early adopter, Anda mendapatkan akses penuh ke fitur kamera AR, tutor AI harian, dan modul 16 tenses.'
+              q: 'Bagaimana alur belajar tenses di aplikasi TenseGO?',
+              a: 'Alurnya sangat mudah dan terstruktur! Sebelum masuk ke AR, kamu memilih tenses yang ingin dipelajari (dari 16 tenses yang ada) serta mengatur preferensi belajar (tujuan, tema, gaya penjelasan AI). AI Tutor lalu memberikan penjelasan mendalam tentang rumus dan penggunaannya. Kamu bisa bertanya kapan saja via Chat AI, memindai benda dengan Kamera AR untuk melihat penerapan langsung, atau mengasah pemahaman lewat Game AR.'
+            },
+            {
+              q: 'Apakah ada fitur Game AR di TenseGO?',
+              a: 'Ya, tentu ada! TenseGO tidak hanya memindai objek sekitar, tetapi juga dilengkapi mini Game AR seru di mana kamu bisa bermain secara interaktif sambil melatih refleks penggunaan tenses secara langsung melalui kamera smartphone.'
+            },
+            {
+              q: 'Bagaimana ketentuan akses gratis di aplikasi TenseGO?',
+              a: 'TenseGO dapat digunakan secara gratis dengan ketentuan dan batasan wajar yang berlaku di dalam aplikasi. Kamu bisa mencoba berbagai fitur unggulan seperti AI Tutor, Chat AI, Kamera AR, dan Game AR. Setelahnya, kamu dapat memilih paket PRO Monthly (Rp 29.000/bln) atau Ultimate.'
+            },
+            {
+              q: 'Apakah TenseGO gratis diunduh di Google Play Store?',
+              a: 'Ya, TenseGO 100% gratis diunduh di Google Play Store tanpa perlu mendaftarkan kartu kredit.'
             },
             {
               q: 'Perangkat Android apa saja yang didukung oleh TenseGO?',
-              a: 'TenseGO mendukung semua smartphone Android yang menjalankan sistem operasi Android 8.0 (Oreo) ke atas yang memiliki kamera.'
+              a: 'TenseGO mendukung semua smartphone Android yang menjalankan OS Android 8.0 (Oreo) ke atas dan memiliki kamera belakang aktif.'
             },
             {
-              q: 'Bagaimana cara kerja fitur kamera Augmented Reality (AR)?',
-              a: 'Cukup arahkan kamera ke benda di sekeliling Anda (seperti gelas kopi atau laptop). Model visi komputer dan AI kami mengenali objek dan aktivitasnya, lalu langsung merangkai kalimat dalam tenses yang sedang Anda pelajari.'
-            },
-            {
-              q: 'Apakah data dan kamera saya aman?',
-              a: 'Sangat aman. Pemrosesan kamera dilakukan secara lokal dan kami tidak pernah menyimpan atau membagikan rekaman video atau foto pribadi Anda ke server pihak ketiga.'
+              q: 'Apakah data dan kamera saya aman saat menggunakan fitur AR?',
+              a: 'Sangat aman. Pemrosesan kamera AR dilakukan secara real-time dan lokal pada perangkat. Kami tidak pernah menyimpan, merekam, atau membagikan foto maupun video pribadi kamu ke server pihak ketiga.'
             }
           ].map((faq, idx) => (
             <div key={idx} className="glass-card-reference rounded-2xl overflow-hidden border border-white/10">
@@ -1716,7 +1693,7 @@ export default function App() {
                 className="w-full p-4 text-left font-bold text-white flex items-center justify-between gap-4"
               >
                 <span>{faq.q}</span>
-                <ChevronDown className={`w-4 h-4 text-[#A26BFF] transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
+                <FAIcon name="fa-chevron-down" className={`w-4 h-4 text-[#A26BFF] transition-transform ${openFaq === idx ? 'rotate-180' : ''}`} />
               </button>
               {openFaq === idx && (
                 <div className="px-4 pb-4 pt-1 text-xs text-slate-300 leading-relaxed border-t border-white/5">
@@ -1760,27 +1737,191 @@ export default function App() {
               className="px-8 py-4 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] hover:from-[#9861FF] hover:to-[#B37EFF] text-white font-extrabold text-base shadow-2xl flex items-center gap-2 mx-auto w-fit active:scale-95 transition-all"
             >
               <span>Download di Google Play</span>
-              <ArrowUpRight className="w-5 h-5" />
+              <FAIcon name="fa-arrow-up-right-from-square" className="w-5 h-5" />
             </a>
           </div>
         </div>
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#06040C] border-t border-white/10 py-10 text-slate-400 text-xs text-center sm:text-left">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#8A4FFF] to-[#E85AA0] p-0.5 flex items-center justify-center overflow-hidden">
-              <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo Buddy" className="w-full h-full object-contain" />
+      <footer className="bg-[#06040C] border-t border-white/10 py-10 text-slate-400 text-xs">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#8A4FFF] to-[#E85AA0] p-0.5 flex items-center justify-center overflow-hidden">
+                <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="Cosmo Buddy" className="w-full h-full object-contain" />
+              </div>
+              <span className="font-bold text-white text-sm">TenseGO</span>
+              <span className="text-slate-500">· Belajar 16 Tenses dengan AI &amp; Kamera AR</span>
             </div>
-            <span className="font-bold text-white text-sm">TenseGO</span>
-            <span className="text-slate-500">· Belajar 16 Tenses dengan AI &amp; Kamera AR</span>
+            
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs">
+              <button onClick={() => { setActiveInfoTab('terms'); setShowInfoModal(true); }} className="hover:text-white transition-colors underline">
+                Syarat &amp; Ketentuan
+              </button>
+              <button onClick={() => { setActiveInfoTab('refund'); setShowInfoModal(true); }} className="hover:text-white transition-colors underline">
+                Kebijakan Refund
+              </button>
+              <button onClick={() => { setActiveInfoTab('contact'); setShowInfoModal(true); }} className="hover:text-white transition-colors underline">
+                Kontak Bisnis &amp; Alamat
+              </button>
+              <button onClick={() => { setActiveInfoTab('desc'); setShowInfoModal(true); }} className="px-3 py-1.5 rounded-full bg-[#8A4FFF]/25 text-[#A26BFF] hover:bg-[#8A4FFF]/40 transition-colors font-semibold border border-[#8A4FFF]/40 flex items-center gap-1.5">
+                <FAIcon name="fa-circle-info" className="text-[#A26BFF]" /> Info Merchant &amp; Kebijakan
+              </button>
+            </div>
           </div>
-          <div className="text-[11px] text-slate-500">
-            © {new Date().getFullYear()} TenseGO Team. All rights reserved.
+
+          <div className="pt-4 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 text-center sm:text-left">
+            <div>© {new Date().getFullYear()} TenseGO Team. All rights reserved.</div>
+            <div>Transaksi &amp; pembelian langganan diproses aman melalui Google Play Billing (Google Play Store).</div>
           </div>
         </div>
       </footer>
+
+      {/* INFO MERCHANT & KEBIJAKAN MODAL */}
+      {showInfoModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fadeIn">
+          <div className="w-full max-w-2xl glass-card-reference rounded-3xl p-6 sm:p-8 space-y-6 relative border border-white/25 max-h-[90vh] overflow-y-auto">
+            <button
+              onClick={() => setShowInfoModal(false)}
+              className="absolute top-5 right-5 text-slate-400 hover:text-white p-2 rounded-full bg-white/10 hover:bg-white/20 transition-colors"
+            >
+              <FAIcon name="fa-xmark" className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-3 border-b border-white/15 pb-4">
+              <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#8A4FFF] to-[#E85AA0] p-0.5 flex items-center justify-center shadow-lg">
+                <img src="assets/aistudio/Cosmo_Buddy_1f87fc2b.png" alt="TenseGO Logo" className="w-full h-full object-contain" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-white">Informasi Merchant &amp; Kebijakan Resmi</h3>
+                <p className="text-xs text-[#E85AA0] flex items-center gap-1.5">TenseGO Official <FAIcon name="fa-circle" className="text-[6px] text-[#E85AA0]" /> Kepatuhan Gateway Pembayaran</p>
+              </div>
+            </div>
+
+            {/* Tabs */}
+            <div className="flex flex-wrap gap-2 text-xs font-semibold">
+              <button
+                onClick={() => setActiveInfoTab('desc')}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  activeInfoTab === 'desc' ? 'bg-[#8A4FFF] text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10'
+                }`}
+              >
+                1. Deskripsi Produk
+              </button>
+              <button
+                onClick={() => setActiveInfoTab('terms')}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  activeInfoTab === 'terms' ? 'bg-[#8A4FFF] text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10'
+                }`}
+              >
+                2. Syarat &amp; Ketentuan
+              </button>
+              <button
+                onClick={() => setActiveInfoTab('refund')}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  activeInfoTab === 'refund' ? 'bg-[#8A4FFF] text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10'
+                }`}
+              >
+                3. Kebijakan Refund
+              </button>
+              <button
+                onClick={() => setActiveInfoTab('contact')}
+                className={`px-4 py-2 rounded-xl transition-all ${
+                  activeInfoTab === 'contact' ? 'bg-[#8A4FFF] text-white shadow' : 'bg-white/5 text-slate-300 hover:bg-white/10'
+                }`}
+              >
+                4. Kontak &amp; Alamat
+              </button>
+            </div>
+
+            {/* Tab Contents */}
+            <div className="p-5 rounded-2xl bg-black/50 border border-white/10 text-xs text-slate-200 space-y-4 leading-relaxed">
+              {activeInfoTab === 'desc' && (
+                <div className="space-y-3">
+                  <h4 className="text-sm font-bold text-white">Deskripsi Produk &amp; Layanan TenseGO</h4>
+                  <p>
+                    <strong className="text-white">TenseGO</strong> adalah aplikasi seluler edukasi berbasis Android yang dirancang khusus untuk membantu pengguna menguasai 16 Tenses bahasa Inggris dengan mudah, interaktif, dan menyenangkan.
+                  </p>
+                  <p>
+                    <strong className="text-emerald-300">Fitur Utama:</strong>
+                  </p>
+                  <ul className="list-disc pl-5 space-y-1.5 text-slate-300">
+                    <li><strong>Kamera AR Real-time:</strong> Memindai objek nyata di sekitar untuk menghasilkan contoh kalimat tenses secara instan.</li>
+                    <li><strong>Tutor AI 24/7 (Cosmo AI):</strong> Bertanya dan berdiskusi seputar tenses kapan saja layaknya sahabat belajar pribadi.</li>
+                    <li><strong>Kuis &amp; Game AR:</strong> Menguji kemampuan grammar secara adaptif dan seru.</li>
+                    <li><strong>Personalisasi Belajar:</strong> Memilih tujuan belajar, tema, dan gaya penjelasan AI.</li>
+                  </ul>
+                  <div className="p-3 bg-amber-500/10 border border-amber-500/30 rounded-xl text-amber-200 flex items-start gap-2">
+                    <FAIcon name="fa-lightbulb" className="text-amber-400 mt-0.5 shrink-0" />
+                    <div><em>Catatan:</em> Website ini berfungsi sebagai landing page informasi &amp; pengenalan aplikasi. Seluruh aktivitas unduhan aplikasi, pendaftaran trial, dan pembelian paket langganan (PRO &amp; Ultimate) dilakukan langsung di dalam aplikasi resmi melalui <strong className="text-white">Google Play Billing (Google Play Store)</strong>.</div>
+                  </div>
+                </div>
+              )}
+
+              {activeInfoTab === 'terms' && (
+                <div className="space-y-3">
+                  <h4 className="text-sm font-bold text-white">Syarat &amp; Ketentuan Penggunaan (Terms of Service)</h4>
+                  <p>1. <strong>Akses Gratis:</strong> Setiap pengguna dapat menggunakan TenseGO secara gratis dengan ketentuan dan batasan wajar yang berlaku di dalam aplikasi.</p>
+                  <p>2. <strong>Langganan Berbayar:</strong> Paket PRO Monthly (Rp 29.000/bln) dan Ultimate (Tahunan/Lifetime) dibeli melalui Google Play Store dengan mata uang Rupiah (IDR).</p>
+                  <p>3. <strong>Kebijakan Wajar (Fair Use):</strong> Layanan AI Tutor diatur dengan batas pemakaian wajar per bulan untuk memastikan kestabilan server bagi seluruh pengguna.</p>
+                  <p>4. <strong>Perubahan Layanan:</strong> TenseGO berhak memperbarui fitur atau ketentuan seiring dengan pengembangan aplikasi.</p>
+                </div>
+              )}
+
+              {activeInfoTab === 'refund' && (
+                <div className="space-y-3">
+                  <h4 className="text-sm font-bold text-white">Kebijakan Pengembalian Dana (Refund &amp; Cancellation Policy)</h4>
+                  <p>
+                    Karena seluruh transaksi langganan dan pembayaran diproses secara aman oleh <strong className="text-white">Google Play Billing (Google Play Store)</strong>, maka seluruh permintaan pengembalian dana (refund) tunduk sepenuhnya pada <strong className="text-emerald-300">Kebijakan Resmi Google Play</strong>.
+                  </p>
+                  <p>
+                    <strong>Cara Mengajukan Refund:</strong>
+                  </p>
+                  <ol className="list-decimal pl-5 space-y-1 text-slate-300">
+                    <li>Buka aplikasi Google Play Store di HP Anda.</li>
+                    <li>Ketuk ikon profil di kanan atas, lalu pilih <strong>Pembayaran &amp; Langganan</strong> &gt; <strong>Anggaran &amp; Riwayat</strong>.</li>
+                    <li>Pilih transaksi TenseGO yang ingin direfund, lalu pilih <strong>Minta Pengembalian Dana</strong>.</li>
+                  </ol>
+                  <p className="text-slate-400">
+                    Biasanya Google Play memproses permohonan refund dalam waktu 1x24 hingga 4x24 jam sesuai ketentuan Google.
+                  </p>
+                </div>
+              )}
+
+              {activeInfoTab === 'contact' && (
+                <div className="space-y-3">
+                  <h4 className="text-sm font-bold text-white">Kontak Bisnis &amp; Informasi Perusahaan</h4>
+                  <div className="space-y-2.5 text-slate-300">
+                    <p className="flex items-center gap-2"><FAIcon name="fa-location-dot" className="text-red-400" /> <strong className="text-white">Alamat Operasional:</strong> 84316 - SUMBAWA - NUSA TENGGARA BARAT, INDONESIA</p>
+                    <p className="flex items-center gap-2"><FAIcon name="fa-envelope" className="text-indigo-400" /> <strong className="text-white">Email Resmi Dukungan:</strong> tensego.official@gmail.com</p>
+                    <p className="flex items-center gap-2"><FAIcon name="fa-phone" className="text-emerald-400" /> <strong className="text-white">Telepon / WhatsApp:</strong> +62 877-5393-5810</p>
+                    <p className="flex items-center gap-2"><FAIcon name="fa-clock" className="text-cyan-400" /> <strong className="text-white">Jam Operasional:</strong> Senin - Jumat, pukul 09.00 - 17.00 WIB</p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex items-center justify-between pt-2">
+              <button
+                onClick={() => setShowInfoModal(false)}
+                className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs transition-all"
+              >
+                Tutup
+              </button>
+              <a
+                href={PLAY_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] text-white font-bold text-xs shadow-lg flex items-center gap-2"
+              >
+                <span>Download TenseGO di Play Store</span>
+                <FAIcon name="fa-arrow-up-right-from-square" className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* GOOGLE PLAY MODAL */}
       {showPlayStoreModal && (
@@ -1790,7 +1931,7 @@ export default function App() {
               onClick={() => setShowPlayStoreModal(false)}
               className="absolute top-4 right-4 text-slate-400 hover:text-white"
             >
-              <X className="w-5 h-5" />
+              <FAIcon name="fa-xmark" className="w-5 h-5" />
             </button>
 
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-tr from-[#8A4FFF] to-[#E85AA0] p-1 flex items-center justify-center text-white mx-auto shadow-2xl overflow-hidden">
@@ -1798,10 +1939,10 @@ export default function App() {
             </div>
 
             <h3 className="text-xl font-bold text-white">TenseGO: AI AR English</h3>
-            <p className="text-xs text-emerald-400 font-semibold">id.replace.tensegoai • 100% Gratis</p>
+            <p className="text-xs text-emerald-400 font-semibold flex items-center justify-center gap-1.5">id.replace.tensegoai <FAIcon name="fa-circle" className="text-[6px] text-emerald-400" /> 100% Gratis</p>
 
             <div className="p-4 bg-black/50 rounded-2xl border border-white/10 flex items-center gap-4 text-left">
-              <QrCode className="w-12 h-12 text-white shrink-0" />
+              <FAIcon name="fa-qrcode" className="w-12 h-12 text-white shrink-0" />
               <div className="text-xs">
                 <div className="font-bold text-white">Scan via Smartphone</div>
                 <div className="text-slate-400 text-[11px]">Arahkan kamera HP untuk membuka langsung di Google Play.</div>
@@ -1815,7 +1956,7 @@ export default function App() {
               className="w-full py-3.5 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] text-white font-bold text-sm shadow-xl flex items-center justify-center gap-2"
             >
               <span>Buka di Google Play Store</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <FAIcon name="fa-arrow-up-right-from-square" className="w-4 h-4" />
             </a>
 
             {isDownloading ? (
@@ -1855,7 +1996,7 @@ export default function App() {
               }}
               className="absolute top-4 right-4 text-slate-400 hover:text-white"
             >
-              <X className="w-5 h-5" />
+              <FAIcon name="fa-xmark" className="w-5 h-5" />
             </button>
 
             <h3 className="text-xl font-bold text-white">Bantu Developer TenseGO</h3>
@@ -1941,7 +2082,7 @@ export default function App() {
               onClick={() => setActiveLightboxImg(null)}
               className="absolute -top-12 right-0 p-2 text-white bg-white/20 hover:bg-white/30 rounded-full transition-colors"
             >
-              <X className="w-6 h-6" />
+              <FAIcon name="fa-xmark" className="w-6 h-6" />
             </button>
             <img
               src={activeLightboxImg}
@@ -1956,7 +2097,7 @@ export default function App() {
                 className="px-6 py-2.5 rounded-full bg-[#8A4FFF] text-white font-bold text-xs flex items-center gap-2 shadow-lg"
               >
                 <span>Unduh TenseGO di Google Play</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <FAIcon name="fa-arrow-up-right-from-square" className="w-4 h-4" />
               </a>
             </div>
           </div>
