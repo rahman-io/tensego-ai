@@ -355,6 +355,7 @@ const SAMPLE_CHAT_FLOWS = [
 
 export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState('beranda');
 
   // Hero Interactive Demo states
   const [selectedARObject, setSelectedARObject] = useState<ARObject>(AR_OBJECTS[0]);
@@ -501,7 +502,7 @@ export default function App() {
       {/* ------------------------------------------------------------- */}
       {/* 1. TOP BAR (Matching Segmented Glass Capsule Nav in Screenshot) */}
       {/* ------------------------------------------------------------- */}
-      <header className="sticky top-0 z-50 px-4 sm:px-6 lg:px-8 py-4 transition-all">
+      <header className="sticky top-0 z-50 bg-[#0A0814] border-b border-white/10 px-4 sm:px-6 lg:px-8 py-4 shadow-2xl transition-all">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           {/* Brand Lockup */}
           <a href="#" className="flex items-center gap-3 shrink-0 group">
@@ -516,16 +517,48 @@ export default function App() {
 
           {/* Center Segmented Glass Nav Capsule (exact 4 items) */}
           <nav className="hidden lg:flex items-center p-1.5 glass-nav-capsule text-xs font-medium text-slate-300">
-            <a href="#" className="px-4 py-2 rounded-full bg-[#8A4FFF] text-white font-semibold shadow-md">
+            <a
+              href="#"
+              onClick={() => setActiveNav('beranda')}
+              className={`px-4 py-2 rounded-full transition-all ${
+                activeNav === 'beranda'
+                  ? 'bg-[#8A4FFF] text-white font-semibold shadow-md'
+                  : 'hover:text-white'
+              }`}
+            >
               Beranda
             </a>
-            <a href="#tutor-ai" className="px-4 py-2 rounded-full hover:text-white transition-colors">
+            <a
+              href="#tutor-ai"
+              onClick={() => setActiveNav('tutor-ai')}
+              className={`px-4 py-2 rounded-full transition-all ${
+                activeNav === 'tutor-ai'
+                  ? 'bg-[#8A4FFF] text-white font-semibold shadow-md'
+                  : 'hover:text-white'
+              }`}
+            >
               Tutor AI 24/7
             </a>
-            <a href="#harga" className="px-4 py-2 rounded-full hover:text-white transition-colors font-medium">
+            <a
+              href="#harga"
+              onClick={() => setActiveNav('harga')}
+              className={`px-4 py-2 rounded-full transition-all ${
+                activeNav === 'harga'
+                  ? 'bg-[#8A4FFF] text-white font-semibold shadow-md'
+                  : 'hover:text-white'
+              }`}
+            >
               Paket Harga
             </a>
-            <a href="#faq" className="px-4 py-2 rounded-full hover:text-white transition-colors">
+            <a
+              href="#faq"
+              onClick={() => setActiveNav('faq')}
+              className={`px-4 py-2 rounded-full transition-all ${
+                activeNav === 'faq'
+                  ? 'bg-[#8A4FFF] text-white font-semibold shadow-md'
+                  : 'hover:text-white'
+              }`}
+            >
               FAQ
             </a>
           </nav>
@@ -536,7 +569,7 @@ export default function App() {
               onClick={() => setShowFeedbackModal(true)}
               className="hidden sm:inline-flex px-4 py-2.5 rounded-full text-xs font-semibold text-slate-200 border border-white/20 hover:bg-white/10 transition-all"
             >
-              Feedback Dev
+              Feedback
             </button>
 
             {/* Primary Capsule Button with Arrow */}
@@ -546,7 +579,7 @@ export default function App() {
               rel="noopener noreferrer"
               className="px-5 py-2.5 rounded-full text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] hover:from-[#9861FF] hover:to-[#B37EFF] shadow-lg shadow-[#8A4FFF]/35 transition-all flex items-center gap-2 active:scale-95 shrink-0"
             >
-              <span>Download Play Store</span>
+              <span>Download</span>
               <FAIcon name="fa-arrow-up-right-from-square" className="w-4 h-4" />
             </a>
 
@@ -566,29 +599,57 @@ export default function App() {
           <div className="lg:hidden max-w-7xl mx-auto mt-3 p-4 rounded-3xl glass-card-reference space-y-2">
             <a
               href="#"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 rounded-xl text-sm font-medium text-slate-200 hover:bg-white/10"
+              onClick={() => {
+                setActiveNav('beranda');
+                setMobileMenuOpen(false);
+              }}
+              className={`block px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                activeNav === 'beranda'
+                  ? 'bg-[#8A4FFF] text-white'
+                  : 'text-slate-200 hover:bg-white/15'
+              }`}
             >
               Beranda
             </a>
             <a
               href="#tutor-ai"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 rounded-xl text-sm font-medium text-slate-200 hover:bg-white/10"
+              onClick={() => {
+                setActiveNav('tutor-ai');
+                setMobileMenuOpen(false);
+              }}
+              className={`block px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                activeNav === 'tutor-ai'
+                  ? 'bg-[#8A4FFF] text-white'
+                  : 'text-slate-200 hover:bg-white/15'
+              }`}
             >
               Tutor AI 24/7
             </a>
             <a
               href="#harga"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 rounded-xl text-sm font-medium text-slate-200 hover:bg-white/10"
+              onClick={() => {
+                setActiveNav('harga');
+                setMobileMenuOpen(false);
+              }}
+              className={`block px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                activeNav === 'harga'
+                  ? 'bg-[#8A4FFF] text-white'
+                  : 'text-slate-200 hover:bg-white/15'
+              }`}
             >
               Paket Harga
             </a>
             <a
               href="#faq"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 rounded-xl text-sm font-medium text-slate-200 hover:bg-white/10"
+              onClick={() => {
+                setActiveNav('faq');
+                setMobileMenuOpen(false);
+              }}
+              className={`block px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+                activeNav === 'faq'
+                  ? 'bg-[#8A4FFF] text-white'
+                  : 'text-slate-200 hover:bg-white/15'
+              }`}
             >
               FAQ
             </a>
@@ -599,7 +660,7 @@ export default function App() {
               }}
               className="w-full text-left px-4 py-2 rounded-xl text-sm font-medium text-[#E85AA0] hover:bg-white/10"
             >
-              Kirim Feedback Developer
+              Feedback
             </button>
           </div>
         )}
@@ -681,7 +742,7 @@ export default function App() {
                   rel="noopener noreferrer"
                   className="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-[#8A4FFF] to-[#A26BFF] hover:from-[#9861FF] hover:to-[#B37EFF] text-white font-bold text-sm shadow-xl shadow-[#8A4FFF]/40 transition-all flex items-center justify-center gap-2 active:scale-95 group"
                 >
-                  <span>Download Play Store</span>
+                  <span>Download</span>
                   <div className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">
                     <FAIcon name="fa-arrow-up-right-from-square" className="w-3.5 h-3.5" />
                   </div>
